@@ -1,0 +1,8 @@
+
+// Resource cache — preload fonts and register cursor animation.
+// Call this from your init script before any UI is displayed.
+
+スクリプト /Plugins/lvui_26/_system/textbox.txt cache
+
+// reusable button configurations
+タッチ素材設定2 Button_Select /Plugins/lvui_26/res/Chat/Chat_Select_Frame_01.png /Plugins/lvui_26/res/Chat/Chat_Select_Frame_02.png /Plugins/lvui_26/res/Chat/Chat_Select_Frame_02.png se_maoudamashii_onepoint26.ogg se_maoudamashii_onepoint30.ogg

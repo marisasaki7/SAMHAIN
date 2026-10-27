@@ -1,0 +1,25 @@
+
+//--------------------------------------------------------------
+// 3-choice layout
+
+栞 select_3 _text1 _text2 _text3
+{
+    タッチ素材設定 /Plugins/lvui_26/res/Chat/Chat_Select_Frame_01.png /Plugins/lvui_26/res/Chat/Chat_Select_Frame_02.png /Plugins/lvui_26/res/Chat/Chat_Select_Frame_02.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg /Plugins/lvui_26/res/se_maoudamashii_system48.ogg
+
+    ボタン0 sys_select_1 363 187 90 "変数 sys_select_result = 1"
+    ボタン文字 sys_select_1 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 20 "{{_text1}}"
+
+    ボタン0 sys_select_2 363 240 90 "変数 sys_select_result = 2"
+    ボタン文字 sys_select_2 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 20 "{{_text2}}"
+
+    ボタン0 sys_select_3 363 292 90 "変数 sys_select_result = 3"
+    ボタン文字 sys_select_3 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 20 "{{_text3}}"
+
+    イン sys_select_.* 200
+    ボタングループ化 sys_select_
+
+    待機 ボタン選択 sys_select_
+
+    .アウト sys_select_.* 200
+}
+スクリプト終了

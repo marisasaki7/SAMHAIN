@@ -1,0 +1,108 @@
+
+スクリプト /Plugins/lvui_26/_system/events.txt register
+
+栞 log_init
+{
+    画面領域開始 sys_backlog 原点回帰時解除
+    {
+        // Backlog textbox setup
+        文字窓 backlog_textbox 200 80 301 900 550 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 20 カメラ付着
+        使用文字窓 backlog_textbox
+        文字色 0 0 0 // 255 255 255
+        文字陰 0
+        文字ワードラップ false
+
+        // Configure backlog
+        バックログ設定 backlog_textbox
+        バックログ台詞登録 true
+        バックログ改ページ接頭辞 "\n\n"
+
+        // Voice replay button resources
+        バックログボイス素材 /Plugins/lvui_26/res/Backlog/Backlog_Btn_Sound_01.png /Plugins/lvui_26/res/Backlog/Backlog_Btn_Sound_02.png /Plugins/lvui_26/res/Backlog/Backlog_Btn_Sound_02.png /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/se_maoudamashii_system47.ogg
+        バックログボイス位置 -10 0
+
+        // Jump button resources
+        バックログジャンプ素材 /Plugins/lvui_26/res/Backlog/Backlog_Btn_Jump_01.png /Plugins/lvui_26/res/Backlog/Backlog_Btn_Jump_02.png /Plugins/lvui_26/res/Backlog/Backlog_Btn_Jump_02.png /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/se_maoudamashii_system47.ogg
+        バックログジャンプ位置 -60 0
+    }
+    画面領域終了 sys_backlog
+
+    // Wheel up opens backlog
+    キーダウン wheel.up スクリプト /Plugins/lvui_26/_system/backlog.txt log_display
+}
+スクリプト終了
+
+//--------------------------------------------------------------
+// Display the backlog
+
+栞 log_display
+{
+    // If backlog was never initialised, do it now
+    もし (!lvExistsObj("backlog_textbox")) {
+        スクリプト 現在 log_init
+    }
+
+    画面領域開始 sys_backlog 原点回帰時解除
+    {
+        // 下位スクリプトの内に、並列スクリプトなどがあればこうする必要あり。
+        変数 下位スクリプトを一時停止させる必要あり = (!lvSystem::IsPausingLowerScripts())
+        もし (下位スクリプトを一時停止させる必要あり) {
+            下位スクリプト一時停止 true
+        }
+        
+        // 演出が通常時間で作動するように。
+        文字進行通常強制 true
+        
+        自動カメラ付着 true
+    
+        // Title background
+        絵0 backlog_main_bg /Plugins/lvui_26/res/Config/Config_Img_BG.png 0 0 250
+        絵0 backlog_main_title /Plugins/lvui_26/res/Backlog/Backlog_Img_Title.png 0 0 251
+    
+        // Close button
+        タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Btn_Exit_01.png /Plugins/lvui_26/res/Config/Config_Btn_Exit_02.png /Plugins/lvui_26/res/Config/Config_Btn_Exit_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system46.ogg
+        ボタン0 backlog_main_btn_close 1225 9 280 ジャンプ log_out
+    
+        .イン backlog_main.* 300
+    
+        // Activate backlog display
+        イン バックログ
+    
+        // Scroll bar
+        ~絵0 backlog_main_scroll /Plugins/lvui_26/res/Backlog/Backlog_Scroll_Frame.png 1246 159 300
+        タッチ素材設定 /Plugins/lvui_26/res/Backlog/Backlog_Scroll_Btn_01.png /Plugins/lvui_26/res/Backlog/Backlog_Scroll_Btn_02.png /Plugins/lvui_26/res/Backlog/Backlog_Scroll_Btn_02.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg
+        ~トラックバー0 backlog_main_scrollball 1250 160 301 縦 395 vn_backlog_pos 0 100
+    
+        .イン backlog_textbox, backlog_main_scroll.* 300
+    
+        // Scroll controls
+        キーダウン wheel.up バックログスクロール -1
+        キーダウン wheel.down バックログスクロール 1
+        キーダウン r.click ジャンプ log_out
+    }    
+}
+//クリックやEnterによる一般的なスクリプト読み込み続行を禁止
+//ジャンプによってのみこの行を乗り越え、読み込みを再開する事が可能。
+//[バックログスクロール 1]によって、バックログの最後に至った場合も、この待機は解除される。
+待機 続行禁止
+
+栞 log_out
+{
+    {
+        // Hide backlog (don't destroy — keep for re-opening)
+        透明度 backlog_textbox 0 300
+        .アウト backlog_main.* 300
+        アウト バックログ
+    
+        // Re-register wheel up to reopen
+        キーダウン wheel.up スクリプト /Plugins/lvui_26/_system/backlog.txt log_display
+    
+        文字進行通常強制 false
+    
+        もし (下位スクリプトを一時停止させる必要あり) {
+            下位スクリプト一時停止 false
+        }
+    }
+    画面領域終了 sys_backlog
+}
+スクリプト終了

@@ -1,0 +1,13 @@
+
+// Macros
+//
+// Usage notes:
+//   commandMacro is safer than macro (no regex side effects).
+//   Prefix with ~ so the macro is only applied to command lines.
+
+// Character name: use 【Name】 in your script to display speaker name.
+~macro "~【(.*)】" "~script /Plugins/lvui_26/_system/textbox.txt name \"$1\""
+
+// Textbox layout shortcuts
+~commandMacro textbox_bottom "script /Plugins/lvui_26/_system/textbox.txt default"
+~commandMacro textbox_vertical "script /Plugins/lvui_26/_system/textbox.txt vertical"

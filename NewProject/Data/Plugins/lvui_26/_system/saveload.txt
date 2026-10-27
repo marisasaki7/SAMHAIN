@@ -1,0 +1,356 @@
+
+// Save/Load — combined save and load screen.
+
+//--------------------------------------------------------------
+栞 set_basic_properties
+{
+    臨時全域変数 slots_per_page = 6
+    臨時全域変数 slots_page_max = 10
+
+    もし (slot_page_current == undefined) {
+        ~保存変数 slot_page_current = 0
+    }
+    
+    // ロード後の仕組みを登録する。
+    スクリプト /Plugins/lvui_26/_system/events.txt register
+    
+    // 名前がsysで始まる個体は保存されないように設定。
+    //セーブ除外範囲 sys.*
+    
+    // 名前がsysで始まる個体はセーブ画像から除外。
+    //セーブ画像除外範囲 sys.*
+    
+    // 名前がsys_で始まる画面領域と、それに属するスクリプト・個体を除外。
+    セーブ除外画面領域 sys_
+    
+    // 臨時全域変数の理由：vn_save_time_formatが実際に必要となるのは
+    // 「スクリプト system/save.txt セーブ開始」呼ばれる時である為。
+    // ただの「変数」は、外部スクリプトでの参照が出来ない。
+    臨時全域変数 vn_save_time_format = "%Y/%m/%d   %H:%M:%S"
+}
+スクリプト終了
+
+//--------------------------------------------------------------
+// Save mode entry
+栞 save_display
+
+画面領域開始 sys_saveload 原点回帰時解除
+ジャンプ display_header "save"
+
+//--------------------------------------------------------------
+// Load mode entry
+栞 load_display
+
+画面領域開始 sys_saveload 原点回帰時解除
+ジャンプ display_header "load"
+
+//--------------------------------------------------------------
+栞 display_header _mode
+
+臨時全域変数 saveload_mode = (_mode)
+スクリプト 現在 set_basic_properties
+
+タッチ処理順位 1
+入力禁止 true
+
+.アウト sys_save_.* 300 同階層画面領域
+
+自動カメラ付着 true
+
+// Title — changes based on mode
+絵 sysheader_save_bg /Plugins/lvui_26/res/Config/Config_Img_BG.png 0 0 301
+もし (saveload_mode == "save") 絵 sysheader_save_title /Plugins/lvui_26/res/Save/Save_Img_Title_Save.png 0 0 304
+もし (saveload_mode == "load") 絵 sysheader_save_title /Plugins/lvui_26/res/Save/Save_Img_Title_Load.png 0 0 304
+
+// Close button
+タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Btn_Exit_01.png /Plugins/lvui_26/res/Config/Config_Btn_Exit_02.png /Plugins/lvui_26/res/Config/Config_Btn_Exit_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system46.ogg
+ボタン sysheader_save_btn_close 1225 9 305 ジャンプ 終了
+
+// Save tab
+もし (saveload_mode == "save") {
+    ~タッチ素材設定 /Plugins/lvui_26/res/Save/Save_Btn_Save_Selected.png /Plugins/lvui_26/res/Save/Save_Btn_Save_Selected.png /Plugins/lvui_26/res/Save/Save_Btn_Save_Selected.png
+    ~ボタン sysheader_save_btn_tosave 520 14 305
+}
+もし (saveload_mode == "load") {
+    ~タッチ素材設定 /Plugins/lvui_26/res/Save/Save_Btn_Save_01.png /Plugins/lvui_26/res/Save/Save_Btn_Save_02.png /Plugins/lvui_26/res/Save/Save_Btn_Save_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+    ~もし ((is_title == false) || (is_title == undefined)) {
+        ボタン sysheader_save_btn_tosave 520 14 305 ジャンプ display_header "save"
+    }
+}
+
+// Load tab
+もし (saveload_mode == "load") {
+    ~タッチ素材設定 /Plugins/lvui_26/res/Save/Save_Btn_Load_Selected.png /Plugins/lvui_26/res/Save/Save_Btn_Load_Selected.png /Plugins/lvui_26/res/Save/Save_Btn_Load_Selected.png
+    ~ボタン sysheader_save_btn_toload 640 14 305
+}
+もし (saveload_mode == "save") {
+    ~タッチ素材設定 /Plugins/lvui_26/res/Save/Save_Btn_Load_01.png /Plugins/lvui_26/res/Save/Save_Btn_Load_02.png /Plugins/lvui_26/res/Save/Save_Btn_Load_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+    ~ボタン sysheader_save_btn_toload 640 14 305 ジャンプ display_header "load"
+}
+
+栞 表示_フェードイン
+変数 in_time = 300
+ジャンプ 表示_情報
+
+栞 表示_即時
+変数 in_time = 0
+入力禁止 true
+描画許可 false
+ジャンプ 表示_情報
+
+//--------------------------------------------------------------
+// Create slots for current page
+
+栞 表示_情報
+.アウト sys_save_.* 0
+
+臨時全域変数 slot_start = (slot_page_current * slots_per_page)
+臨時全域変数 slot1 = (slot_start + 1)
+臨時全域変数 slot2 = (slot_start + 2)
+臨時全域変数 slot3 = (slot_start + 3)
+臨時全域変数 slot4 = (slot_start + 4)
+臨時全域変数 slot5 = (slot_start + 5)
+臨時全域変数 slot6 = (slot_start + 6)
+
+// セーブファイル存在時の枠
+タッチ素材設定 /Plugins/lvui_26/res/Save/Save_Slot_Line.png /Plugins/lvui_26/res/Save/Save_Slot_Over.png /Plugins/lvui_26/res/Save/Save_Slot_Over.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg /Plugins/lvui_26/res/se_maoudamashii_system48.ogg
+ボタン0 sys_save_on_1_frame 48 102 305 スクリプト 現在 slot_action (slot1)
+ボタン0 sys_save_on_2_frame 641 102 305 スクリプト 現在 slot_action (slot2)
+ボタン0 sys_save_on_3_frame 48 281 305 スクリプト 現在 slot_action (slot3)
+ボタン0 sys_save_on_4_frame 641 281 305 スクリプト 現在 slot_action (slot4)
+ボタン0 sys_save_on_5_frame 48 459 305 スクリプト 現在 slot_action (slot5)
+ボタン0 sys_save_on_6_frame 641 459 305 スクリプト 現在 slot_action (slot6)
+
+// セーブファイルが存在しない場合の枠
+タッチ素材設定 /Plugins/lvui_26/res/Save/Save_Slot_Empty_01.png /Plugins/lvui_26/res/Save/Save_Slot_Empty_02.png /Plugins/lvui_26/res/Save/Save_Slot_Empty_02.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg /Plugins/lvui_26/res/se_maoudamashii_system48.ogg
+ボタン0 sys_save_no_1_frame 48 102 305 スクリプト 現在 slot_action (slot1)
+ボタン0 sys_save_no_2_frame 641 102 305 スクリプト 現在 slot_action (slot2)
+ボタン0 sys_save_no_3_frame 48 281 305 スクリプト 現在 slot_action (slot3)
+ボタン0 sys_save_no_4_frame 641 281 305 スクリプト 現在 slot_action (slot4)
+ボタン0 sys_save_no_5_frame 48 459 305 スクリプト 現在 slot_action (slot5)
+ボタン0 sys_save_no_6_frame 641 459 305 スクリプト 現在 slot_action (slot6)
+
+// Show filled slots with data, hide empty slot images for filled slots
+スクリプト 現在 create_common
+
+//--------------------------------------------------------------
+栞 表示_下段
+
+.イン sys_save_.* {{ in_time }}
+アウト sys_save_page.* 0
+
+// Page buttons
+反復実行 1 10 "スクリプト 現在 ページ移動ボタン作成 {}"
+
+キーダウン r.click ジャンプ 終了
+キーダウン wheel.down ジャンプ page_next
+キーダウン wheel.up ジャンプ page_pre
+
+入力禁止 false
+描画許可 true
+
+待機 ボタン選択 sys
+ジャンプ 表示_即時
+
+//--------------------------------------------------------------
+// Create common slot content (thumbnails, dates, delete buttons)
+
+栞 create_common
+{
+    // For each slot, show save data if it exists
+    自動カメラ付着 true
+
+    もし (lvSaveExists(slot1)) {
+        ~アウト sys_save_no_1_frame
+        ~絵0 sys_save_on_1_frame_bg /Plugins/lvui_26/res/Save/Save_Slot_Frame.png 48 102 305
+        ~絵0 sys_save_on_1_thumb (lvSaveImagePath(slot1)) 56 106 306
+    } 違ったら {
+        ~アウト sys_save_on_1_frame
+    }
+
+    もし (lvSaveExists(slot2)) {
+        ~アウト sys_save_no_2_frame
+        ~絵0 sys_save_on_2_frame_bg /Plugins/lvui_26/res/Save/Save_Slot_Frame.png 641 102 305
+        ~絵0 sys_save_on_2_thumb (lvSaveImagePath(slot2)) 649 106 305.1
+    } 違ったら {
+        ~アウト sys_save_on_2_frame
+    }
+
+    もし (lvSaveExists(slot3)) {
+        ~アウト sys_save_no_3_frame
+        ~絵0 sys_save_on_3_frame_bg /Plugins/lvui_26/res/Save/Save_Slot_Frame.png 48 281 305
+        ~絵0 sys_save_on_3_thumb (lvSaveImagePath(slot3)) 56 285 305.1
+    } 違ったら {
+        ~アウト sys_save_on_3_frame
+    }
+
+    もし (lvSaveExists(slot4)) {
+        ~アウト sys_save_no_4_frame
+        ~絵0 sys_save_on_4_frame_bg /Plugins/lvui_26/res/Save/Save_Slot_Frame.png 641 281 305
+        ~絵0 sys_save_on_4_thumb (lvSaveImagePath(slot4)) 649 285 305.1
+    } 違ったら {
+        ~アウト sys_save_on_4_frame
+    }
+
+    もし (lvSaveExists(slot5)) {
+        ~アウト sys_save_no_5_frame
+        ~絵0 sys_save_on_5_frame_bg /Plugins/lvui_26/res/Save/Save_Slot_Frame.png 48 459 305
+        ~絵0 sys_save_on_5_thumb (lvSaveImagePath(slot5)) 56 463 305.1
+    } 違ったら {
+        ~アウト sys_save_on_5_frame
+    }
+
+    もし (lvSaveExists(slot6)) {
+        ~アウト sys_save_no_6_frame
+        ~絵0 sys_save_on_6_frame_bg /Plugins/lvui_26/res/Save/Save_Slot_Frame.png 641 459 305
+        ~絵0 sys_save_on_6_thumb (lvSaveImagePath(slot6)) 649 463 305.1
+    } 違ったら {
+        ~アウト sys_save_on_6_frame
+    }
+    
+    // 日付
+    {
+        ~文字0 sys_save_on_1_date 350 120 306 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 23 "{{ (lvSaveInfo(slot1, \"date\")) }}"
+        ~文字0 sys_save_on_2_date 943 120 306 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 23 "{{ (lvSaveInfo(slot2, \"date\")) }}"
+        ~文字0 sys_save_on_3_date 350 295 306 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 23 "{{ (lvSaveInfo(slot3, \"date\")) }}"
+        ~文字0 sys_save_on_4_date 943 295 306 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 23 "{{ (lvSaveInfo(slot4, \"date\")) }}"
+        ~文字0 sys_save_on_5_date 350 475 306 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 23 "{{ (lvSaveInfo(slot5, \"date\")) }}"
+        ~文字0 sys_save_on_6_date 943 475 306 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 23 "{{ (lvSaveInfo(slot6, \"date\")) }}"
+    }
+    
+    // 台詞
+    // 文字ではなく文字窓の理由：
+    // 台詞を一定枠内に出来るだけ表示させ、超えた分は捨てる為。
+    // (必要なら台詞を複数行にて再編集して)80
+    // 文字にすると台詞全体の長さに合わせ延々と伸びる。
+    {
+        ~文字窓0 sys_save_on_1_infoStr 350 155 306 200 50 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 17 超過無視 (lvSaveInfo(slot1, "text"))
+        ~文字窓0 sys_save_on_2_infoStr 943 155 306 200 50 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 17 超過無視 (lvSaveInfo(slot2, "text"))
+        ~文字窓0 sys_save_on_3_infoStr 350 330 306 200 50 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 17 超過無視 (lvSaveInfo(slot3, "text"))
+        ~文字窓0 sys_save_on_4_infoStr 943 330 306 200 50 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 17 超過無視 (lvSaveInfo(slot4, "text"))
+        ~文字窓0 sys_save_on_5_infoStr 350 510 306 200 50 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 17 超過無視 (lvSaveInfo(slot5, "text"))
+        ~文字窓0 sys_save_on_6_infoStr 943 510 306 200 50 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 17 超過無視 (lvSaveInfo(slot6, "text"))   
+    }
+    
+    // 数字
+    {
+        ~絵0 sys_save_on_1_numframe /Plugins/lvui_26/res/Save/Save_Slot_Num_Frame.png 56 106 315
+        ~絵0 sys_save_on_2_numframe /Plugins/lvui_26/res/Save/Save_Slot_Num_Frame.png 649 106 315
+        ~絵0 sys_save_on_3_numframe /Plugins/lvui_26/res/Save/Save_Slot_Num_Frame.png 56 285 315
+        ~絵0 sys_save_on_4_numframe /Plugins/lvui_26/res/Save/Save_Slot_Num_Frame.png 649 285 315
+        ~絵0 sys_save_on_5_numframe /Plugins/lvui_26/res/Save/Save_Slot_Num_Frame.png 56 463 315
+        ~絵0 sys_save_on_6_numframe /Plugins/lvui_26/res/Save/Save_Slot_Num_Frame.png 649 463 315
+        
+        ~文字0 sys_save_on_1_num 77 117 320 /Plugins/lvui_26/res/texgyreheroscn-bold.otf 20 中央 "{{ slot1 }}"
+        ~文字0 sys_save_on_2_num 670 117 320 /Plugins/lvui_26/res/texgyreheroscn-bold.otf 20 中央 "{{ slot2 }}"
+        ~文字0 sys_save_on_3_num 77 296 320 /Plugins/lvui_26/res/texgyreheroscn-bold.otf 20 中央 "{{ slot3 }}"
+        ~文字0 sys_save_on_4_num 670 296 320 /Plugins/lvui_26/res/texgyreheroscn-bold.otf 20 中央 "{{ slot4 }}"
+        ~文字0 sys_save_on_5_num 77 474 320 /Plugins/lvui_26/res/texgyreheroscn-bold.otf 20 中央 "{{ slot5 }}"
+        ~文字0 sys_save_on_6_num 670 474 320 /Plugins/lvui_26/res/texgyreheroscn-bold.otf 20 中央 "{{ slot6 }}"
+    }
+
+    // Delete buttons
+    {
+        タッチ素材設定 /Plugins/lvui_26/res/Save/Save_Slot_Btn_Delete_01.png /Plugins/lvui_26/res/Save/Save_Slot_Btn_Delete_02.png /Plugins/lvui_26/res/Save/Save_Slot_Btn_Delete_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system46.ogg
+        もし (lvSaveExists(slot1)) ボタン0 sys_save_del_1 591 113 315 スクリプト 現在 データ削除 (slot1)
+        もし (lvSaveExists(slot2)) ボタン0 sys_save_del_2 1184 113 315 スクリプト 現在 データ削除 (slot2)
+        もし (lvSaveExists(slot3)) ボタン0 sys_save_del_3 591 292 315 スクリプト 現在 データ削除 (slot3)
+        もし (lvSaveExists(slot4)) ボタン0 sys_save_del_4 1184 292 315 スクリプト 現在 データ削除 (slot4)
+        もし (lvSaveExists(slot5)) ボタン0 sys_save_del_5 591 470 315 スクリプト 現在 データ削除 (slot5)
+        もし (lvSaveExists(slot6)) ボタン0 sys_save_del_6 1184 470 315 スクリプト 現在 データ削除 (slot6)
+    }
+    
+    // 文字設定更新
+    {
+        ~文字陰 sys_save_.*date 0
+        ~文字太字 sys_save_.*date false
+        ~文字色 sys_save_.*date 80 80 80
+        
+        ~文字陰 sys_save_.*infoStr 0
+        ~文字太字 sys_save_.*infoStr false
+        ~文字色 sys_save_.*infoStr 80 80 80
+        
+        ~文字陰 sys_save_.*num 0
+        ~文字太字 sys_save_.*num false
+        ~文字色 sys_save_.*num 254 254 254
+    }
+}
+スクリプト終了
+
+//--------------------------------------------------------------
+// Page button creation (called via 反復実行)
+
+栞 ページ移動ボタン作成 _page_num
+{
+    自動カメラ付着 true
+    変数 page_x = (280 + (_page_num * 60))
+    変数 string_name = "savepage_str_{{_page_num}}"
+    
+    変数 page_string = "10"
+    もし (_page_num < 10) 変数 page_string =  "0{{_page_num}}"
+
+    もし (_page_num == (slot_page_current + 1)) {
+        ~絵 sys_save_page_{{_page_num}} /Plugins/lvui_26/res/Extra/Extra_Cg_Page_{{ page_string }}_Selected.png (page_x) 640 305
+    } 違ったら {
+        ~タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Cg_Page_{{ page_string }}_01.png /Plugins/lvui_26/res/Extra/Extra_Cg_Page_{{ page_string }}_02.png /Plugins/lvui_26/res/Extra/Extra_Cg_Page_01_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+        // page numbers are 1-based, slot_page_current is 0-based
+        ~ボタン sys_save_page_{{_page_num}} (page_x) 640 305 "保存変数 slot_page_current = (_page_num - 1) | ジャンプ 表示_即時"
+    }
+}
+スクリプト終了
+
+//--------------------------------------------------------------
+// Slot action
+
+栞 slot_action _番号
+{
+    もし (saveload_mode == "save") {
+        ~もし (lvSaveExists(_番号)) ダイアログ "データを上書きしますか？" セーブ (_番号) 280 156
+        ~もし (!lvSaveExists(_番号)) セーブ (_番号) 280 156
+    } 違ったら {
+        ~もし (!lvSaveExists(_番号)) スクリプト終了
+        ~ダイアログ "データをロードしますか？" ロード (_番号)
+    }
+}
+スクリプト終了
+
+//--------------------------------------------------------------
+// Delete save data
+
+栞 データ削除 _番号
+{
+    ダイアログ "データを削除しますか？" セーブ削除 (_番号)
+}
+スクリプト終了
+
+//--------------------------------------------------------------
+// Page navigation
+
+栞 page_next
+{
+    効果音 sys_page_refresh /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+    保存変数 slot_page_current = ((slot_page_current + 1) % slots_page_max)
+    ジャンプ 表示_即時
+}
+スクリプト終了
+
+栞 page_pre
+{
+    効果音 sys_page_refresh /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+    保存変数 slot_page_current -= 1
+    もし (slot_page_current < 0) 保存変数 slot_page_current = (slots_page_max - 1)
+    ジャンプ 表示_即時
+}
+スクリプト終了
+
+//--------------------------------------------------------------
+// Close screen
+
+栞 終了
+{
+    .アウト sys_save_.*, savepage_str.* 300
+    .アウト .*save.* 300 全画面領域
+
+    画面領域終了 sys_saveload
+}
+スクリプト終了

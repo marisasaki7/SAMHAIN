@@ -1,0 +1,26 @@
+
+// Config tab navigation helper — shared by all config pages.
+
+//--------------------------------------------------------------
+// Called when switching from one config tab to another.
+
+栞 config_change
+{
+    キーダウン r.click
+
+    .アウト sysc_.* 300 同階層画面領域
+}
+スクリプト終了
+
+//--------------------------------------------------------------
+// Called when closing the config screen entirely.
+
+栞 config_out
+{
+    キーダウン r.click
+
+    .アウト 画面領域 300 同階層画面領域
+
+    システム変数保存
+}
+スクリプト終了

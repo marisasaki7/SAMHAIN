@@ -1,0 +1,93 @@
+
+// Config: System — window mode and resolution.
+
+栞 config_in_first
+
+// iOS, Android などではウインドウサイズの設定はできない。
+もし (lvSystem::IsFixedWindowSize()) ジャンプ /Plugins/lvui_26/_system/config-text.txt config_in_first
+
+// 原点回帰時解除: ロード時の/Plugins/lvui_26/_system/events.txtの「スクリプト終了原点回帰」実行時に
+// この画面領域も一緒に解除されてほしい。
+画面領域開始 sys_config 原点回帰時解除
+
+スクリプト  /Plugins/lvui_26/_system/config-pages.txt config_change
+絵0 syscheader_config /Plugins/lvui_26/res/Config/Config_Img_BG.png 0 0 703 カメラ付着
+.イン syscheader_config 300
+
+//---------------------------------------------------------------
+// Config の別画面からここにくる際の処理
+
+栞 config_in
+画面領域上書き sys_config_system
+
+スクリプト /Plugins/lvui_26/_system/config-pages.txt config_change
+
+//--------------------------------------------------------------
+栞 config_btns
+
+自動カメラ付着 true
+
+絵 syscheader_config /Plugins/lvui_26/res/Config/Config_Img_BG.png 0 0 703
+絵 syscheader_config_title /Plugins/lvui_26/res/Config/Config_Img_Title.png 0 0 704
+
+タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Btn_Exit_01.png /Plugins/lvui_26/res/Config/Config_Btn_Exit_02.png /Plugins/lvui_26/res/Config/Config_Btn_Exit_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system46.ogg
+ボタン syscheader_close 1225 9 705 ジャンプ config_out
+
+// Tab bar — System selected
+~タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Btn_System_Selected.png /Plugins/lvui_26/res/Config/Config_Btn_System_Selected.png /Plugins/lvui_26/res/Config/Config_Btn_System_Selected.png
+~ボタン syscheader_btn0 340 14 705
+~タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Btn_Text_01.png /Plugins/lvui_26/res/Config/Config_Btn_Text_02.png /Plugins/lvui_26/res/Config/Config_Btn_Text_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+~ボタン syscheader_btn1 460 14 705 ジャンプ /Plugins/lvui_26/_system/config-text.txt config_in
+~タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Btn_Sound_01.png /Plugins/lvui_26/res/Config/Config_Btn_Sound_02.png /Plugins/lvui_26/res/Config/Config_Btn_Sound_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+~ボタン syscheader_btn2 580 14 705 ジャンプ /Plugins/lvui_26/_system/config-sound.txt config_in
+~タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Btn_Voice_01.png /Plugins/lvui_26/res/Config/Config_Btn_Voice_02.png /Plugins/lvui_26/res/Config/Config_Btn_Voice_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+~ボタン syscheader_btn3 700 14 705 ジャンプ /Plugins/lvui_26/_system/config-voice.txt config_in
+~タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Btn_Info_01.png /Plugins/lvui_26/res/Config/Config_Btn_Info_02.png /Plugins/lvui_26/res/Config/Config_Btn_Info_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+~ボタン syscheader_btn4 820 14 705 ジャンプ /Plugins/lvui_26/_system/config-info.txt config_in
+
+//--------------------------------------------------------------
+// Window Mode title
+絵0 sysc_title1 /Plugins/lvui_26/res/Config/Config_System_Img_Title_01.png 250 121 704
+
+// Window mode buttons
+タッチ素材設定 /Plugins/lvui_26/res/Config/Config_System_Btn_FullScreen_01.png /Plugins/lvui_26/res/Config/Config_System_Btn_FullScreen_02.png /Plugins/lvui_26/res/Config/Config_System_Btn_FullScreen_02.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/Config/Config_System_Btn_FullScreen_Selected.png
+ボタン0 sysc_wm_fullscreen 234 152 704 スクリーン 0
+ハイライト条件 sysc_wm_fullscreen "(lvSystem::WindowMode() == 0)"
+
+タッチ素材設定 /Plugins/lvui_26/res/Config/Config_System_Btn_Window_01.png /Plugins/lvui_26/res/Config/Config_System_Btn_Window_02.png /Plugins/lvui_26/res/Config/Config_System_Btn_Window_02.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/Config/Config_System_Btn_Window_Selected.png
+ボタン0 sysc_wm_window 505 152 704 スクリーン 1
+ハイライト条件 sysc_wm_window "(lvSystem::WindowMode() == 1)"
+
+タッチ素材設定 /Plugins/lvui_26/res/Config/Config_System_Btn_FullWindow_01.png /Plugins/lvui_26/res/Config/Config_System_Btn_FullWindow_02.png /Plugins/lvui_26/res/Config/Config_System_Btn_FullWindow_02.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/Config/Config_System_Btn_FullWindow_Selected.png
+ボタン0 sysc_wm_fullwindow 776 152 704 スクリーン 2
+ハイライト条件 sysc_wm_fullwindow "(lvSystem::WindowMode() == 2)"
+
+// Window Size title
+絵0 sysc_title2 /Plugins/lvui_26/res/Config/Config_System_Img_Title_02.png 250 306 704
+
+// Window size buttons
+タッチ素材設定 /Plugins/lvui_26/res/Config/Config_System_Btn_1024_01.png /Plugins/lvui_26/res/Config/Config_System_Btn_1024_02.png /Plugins/lvui_26/res/Config/Config_System_Btn_1024_02.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/Config/Config_System_Btn_1024_Selected.png
+ボタン0 sysc_ws_1024 234 337 704 スクリーン 1 1024 576
+ハイライト条件 sysc_ws_1024 "(lvSystem::WindowSize()[0] == 1024) && (lvSystem::WindowSize()[1] == 576)"
+
+タッチ素材設定 /Plugins/lvui_26/res/Config/Config_System_Btn_1280_01.png /Plugins/lvui_26/res/Config/Config_System_Btn_1280_02.png /Plugins/lvui_26/res/Config/Config_System_Btn_1280_02.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/Config/Config_System_Btn_1280_Selected.png
+ボタン0 sysc_ws_1280 505 337 704 スクリーン 1 1280 720
+ハイライト条件 sysc_ws_1280 "(lvSystem::WindowSize()[0] == 1280) && (lvSystem::WindowSize()[1] == 720)"
+
+タッチ素材設定 /Plugins/lvui_26/res/Config/Config_System_Btn_1600_01.png /Plugins/lvui_26/res/Config/Config_System_Btn_1600_02.png /Plugins/lvui_26/res/Config/Config_System_Btn_1600_02.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/Config/Config_System_Btn_1600_Selected.png
+ボタン0 sysc_ws_1600 776 337 704 スクリーン 1 1600 900
+ハイライト条件 sysc_ws_1600 "(lvSystem::WindowSize()[0] == 1600) && (lvSystem::WindowSize()[1] == 900)"
+
+.イン sysc_.* 300
+
+~キーダウン r.click ジャンプ config_out
+
+待機 続行禁止
+
+//--------------------------------------------------------------
+栞 config_out
+{
+    スクリプト /Plugins/lvui_26/_system/config-pages.txt config_out
+    画面領域終了 sys_config_system
+}
+スクリプト終了

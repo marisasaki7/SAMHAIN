@@ -1,0 +1,148 @@
+
+// Menu — popup menu triggered by right-click.
+
+栞 menu_setup
+{
+    スクリプト /Plugins/lvui_26/_system/backlog.txt log_init
+
+    スクリプト /Plugins/lvui_26/_system/events.txt register
+
+    キーダウン r.click スクリプト /Plugins/lvui_26/_system/menu.txt menu_show
+}
+スクリプト終了
+
+~//---------------------------------------------------------------
+
+栞 menu_show
+{
+    画面領域開始 sys_menu 原点回帰時解除
+
+    // Pause lower scripts if they have parallel scripts
+    下位スクリプト一時停止 true
+
+    // Force normal text speed during menu
+    文字進行通常強制 true
+
+    // Pause all effects except BGM
+    一時停止 "(?!vn_sysBGM).*" 全画面領域
+
+    スクリプト /Plugins/lvui_26/_system/textbox.txt txt_hide
+
+    自動カメラ付着 true
+
+    // Menu frame
+    絵0 sysmenu /Plugins/lvui_26/res/Popup/Popup_Frame.png 1004 68 103
+    .イン sysmenu 300
+
+    保存変数 メニュー表示中 = true
+
+    // Buttons
+    // Backlog
+    タッチ素材設定 /Plugins/lvui_26/res/Popup/Popup_Btn_Backlog_01.png /Plugins/lvui_26/res/Popup/Popup_Btn_Backlog_02.png /Plugins/lvui_26/res/Popup/Popup_Btn_Backlog_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+    ボタン0 sysmenu_button1 1030 86 104 スクリプト /Plugins/lvui_26/_system/backlog.txt log_display
+    拡大 sysmenu_button1 90%
+
+    // Config
+    タッチ素材設定 /Plugins/lvui_26/res/Popup/Popup_Btn_Config_01.png /Plugins/lvui_26/res/Popup/Popup_Btn_Config_02.png /Plugins/lvui_26/res/Popup/Popup_Btn_Config_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+    ボタン0 sysmenu_button4 1030 266 104 スクリプト /Plugins/lvui_26/_system/config-system.txt config_in_first
+    拡大 sysmenu_button4 90%
+
+    // Close
+    タッチ素材設定 /Plugins/lvui_26/res/Popup/Popup_Btn_Close_01.png /Plugins/lvui_26/res/Popup/Popup_Btn_Close_02.png /Plugins/lvui_26/res/Popup/Popup_Btn_Close_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system46.ogg
+    ボタン0 sysmenu_button6 1030 386 104 ジャンプ menu_out
+    拡大 sysmenu_button6 90%
+
+    もし (g_scene_replay == true) ジャンプ menu_button_fadein
+
+    栞 menu_non_replay
+
+    // Save
+    タッチ素材設定 /Plugins/lvui_26/res/Popup/Popup_Btn_Save_01.png /Plugins/lvui_26/res/Popup/Popup_Btn_Save_02.png /Plugins/lvui_26/res/Popup/Popup_Btn_Save_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+    ボタン0 sysmenu_button2 1030 146 104 スクリプト /Plugins/lvui_26/_system/saveload.txt save_display
+    拡大 sysmenu_button2 90%
+
+    // Load
+    タッチ素材設定 /Plugins/lvui_26/res/Popup/Popup_Btn_Load_01.png /Plugins/lvui_26/res/Popup/Popup_Btn_Load_02.png /Plugins/lvui_26/res/Popup/Popup_Btn_Load_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+    ボタン0 sysmenu_button3 1030 206 104 スクリプト /Plugins/lvui_26/_system/saveload.txt load_display
+    拡大 sysmenu_button3 90%
+
+    // Title
+    タッチ素材設定 /Plugins/lvui_26/res/Popup/Popup_Btn_Title_01.png /Plugins/lvui_26/res/Popup/Popup_Btn_Title_02.png /Plugins/lvui_26/res/Popup/Popup_Btn_Title_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+    ボタン0 sysmenu_button5 1030 326 104 ダイアログ "タイトルへ戻りますか？" スクリプト /Plugins/lvui_26/_system/menu.txt to_title
+    拡大 sysmenu_button5 90%
+
+    栞 menu_button_fadein
+
+    // Staggered button fade-in
+    拡大 sysmenu_button1 100% 200
+    .イン sysmenu_button1 40
+
+    拡大 sysmenu_button2 100% 200
+    .イン sysmenu_button2 40
+
+    拡大 sysmenu_button3 100% 200
+    .イン sysmenu_button3 40
+
+    拡大 sysmenu_button4 100% 200
+    .イン sysmenu_button4 40
+
+    拡大 sysmenu_button5 100% 200
+    .イン sysmenu_button5 40
+
+    拡大 sysmenu_button6 100% 200
+    .イン sysmenu_button6 40
+
+    栞 menu_reappear
+
+    文字進行通常強制 true
+    キーダウン r.click ジャンプ menu_out
+}
+待機 続行禁止
+
+~//---------------------------------------------------------------
+
+栞 menu_out
+{
+    入力禁止 true
+
+    スクリプト /Plugins/lvui_26/_system/textbox.txt txt_show
+
+    .アウト 画面領域 300
+
+    文字進行通常強制 false
+
+    栞 menu_out_end
+
+    保存変数 メニュー表示中 = false
+
+    再生続行 "(?!vn_sysBGM).*" 全画面領域
+
+    入力禁止 false
+
+    下位スクリプト一時停止 false
+
+    画面領域終了 sys_menu
+}
+スクリプト終了
+
+~//---------------------------------------------------------------
+栞 to_title
+{
+    入力禁止 true
+    
+    最後自動セーブ false
+
+    アウト 背景音, 効果音, ボイス 800
+    ~絵0 fadeout_black /Plugins/lvui_26/res/black_full_1280.png 0 0 2000 カメラ付着 | .イン fadeout_black 800
+
+    待機 1000
+
+    クリア色 0 0 0
+
+    クリア 全画面領域
+
+    入力禁止 false
+}
+最終ジャンプ title.txt
+
+

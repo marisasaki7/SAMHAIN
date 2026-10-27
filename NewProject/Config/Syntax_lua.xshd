@@ -1,0 +1,83 @@
+﻿<SyntaxDefinition name="LightVn" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <Color name="Comment" foreground="Green"/>
+  <Color name="String" foreground="Tomato"/>
+  <Color name="Types" foreground="Purple"/>
+  <Color name="Keywords" foreground="DarkOrchid" fontWeight="bold"/>
+  <Color name="MethodName" foreground="MidnightBlue" fontWeight="bold" />
+  <Color name="LvnMethods" foreground="MediumVioletRed" fontWeight="bold" />
+
+  <!-- This is the main ruleset. -->
+  <RuleSet>
+
+    <!--Comments-->
+    <Span begin="--" color="Comment"/>
+    <Span color="Comment" multiline="true">
+      <Begin>--\[\[</Begin>
+      <End>\]\]</End>
+    </Span>
+
+    <!---->
+    <Span color="String">
+      <Begin>&quot;</Begin>
+      <End>&quot;</End>
+      <RuleSet>
+        <!--nested span for escape sequences--> 
+        <Span begin="\\" end="."/>
+      </RuleSet>
+    </Span>
+
+    <!-- Digits -->
+    <Rule color="Types">
+      \b0[xX][0-9a-fA-F]+  # hex number
+      |    \b
+      (    \d+(\.[0-9]+)?   #number with optional floating point
+      |    \.[0-9]+         #or just starting with floating point
+      )
+      ([eE][+-]?[0-9]+)? # optional exponent
+    </Rule>
+    <Keywords color="Types">
+      <Word>false</Word>
+      <Word>true</Word>
+      <Word>nil</Word>
+    </Keywords>
+
+    <!---->
+    <Keywords color="Keywords">
+      <Word>and</Word>
+      <Word>break</Word>
+      <Word>do</Word>
+      <Word>else</Word>
+      <Word>elseif</Word>
+      <Word>end</Word>
+      <Word>for</Word>
+      <Word>function</Word>
+      <Word>if</Word>
+      <Word>in</Word>
+      <Word>local</Word>
+      <Word>not</Word>
+      <Word>or</Word>
+      <Word>repeat</Word>
+      <Word>return</Word>
+      <Word>then</Word>
+      <Word>until</Word>
+      <Word>while</Word>
+    </Keywords>
+
+    <!-- Light.vn Related -->
+    <Keywords color="LvnMethods">
+      <Word>lvCmd</Word>
+      <Word>lvGetVar</Word>
+      <Word>lvSetVar</Word>
+      <Word>lvSetDataVar</Word>
+      <Word>lvSetGlobalVar</Word>
+      <Word>lvLog</Word>
+      <Word>lvSystemMessage</Word>
+      <Word>lvSystemError</Word>
+      <Word>lvFileExists</Word>
+    </Keywords>
+
+    <Rule color="MethodName">[\d\w_]+(?=(\s*\())</Rule>
+    <Rule color="MethodName">[\d\w_]+[.]</Rule>
+
+  </RuleSet>
+</SyntaxDefinition>

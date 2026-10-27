@@ -1,0 +1,416 @@
+﻿<SyntaxDefinition name="LightVn" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <Color foreground="Green" name="Comment"/>
+  <Color foreground="Blue" name="String"/>
+  <!-- This is the main ruleset. -->
+  <RuleSet>
+    <Span begin="//" color="Comment"/>
+    <!--<Span begin="/\*" color="Comment" end="\*/" multiline="true"/>-->
+    <!-- 'strings' "lines -->
+    <Span begin="'" color="String" end="'"/>
+    <Span begin="~-&quot;" color="String"/>
+    <!--<Span color="String">
+      <Begin>&quot;</Begin>
+      <End>&quot;</End>
+      <RuleSet>
+        --><!-- nested span for escape sequences --><!--
+        <Span begin="\\" end="."/>
+      </RuleSet>
+    </Span>-->
+    <Span begin=" &quot;" end="&quot;" color="String"/>
+    <Span color="String" multiline="true">
+      <Begin>&quot;</Begin>
+      <End>~</End>
+    </Span>
+    <!-- Digits -->
+    <Rule foreground="DarkBlue">\b0[xX][0-9a-fA-F]+  # hex number
+        |    \b
+            (    \d+(\.[0-9]+)?   #number with optional floating point
+            |    \.[0-9]+         #or just starting with floating point
+            )
+            ([eE][+-]?[0-9]+)? # optional exponent
+    </Rule>
+    <Keywords foreground="DarkRed">
+      <Word>@</Word>
+    </Keywords>
+    <Keywords foreground="DarkOrchid">
+      <Word>true</Word>
+      <Word>false</Word>
+      <Word>undefined</Word>
+    </Keywords>
+    <!---->
+    <Keywords foreground="Black">
+      <Word>.lua</Word>
+    </Keywords>
+    <!-- System -->
+    <Keywords fontWeight="bold" foreground="DarkRed">
+      <Word>システムメッセージ</Word>
+      <Word>SystemMessage</Word>
+      <Word>システムエラ</Word>
+      <Word>SystemError</Word>
+    </Keywords>
+    <Keywords fontWeight="bold" foreground="Chocolate">
+      <Word>栞</Word>
+      <Word>bookmark</Word>
+    </Keywords>
+    <Keywords fontWeight="bold" foreground="DarkOrchid">
+      <Word>スクリプト終了</Word>
+      <Word>script_fin</Word>
+      <Word>スクリプト終了原点回帰</Word>
+      <Word>script_fin_return_to_main</Word>
+    </Keywords>
+    <Keywords fontWeight="bold" foreground="Chocolate">
+      <Word>続行</Word>
+      <Word>continueRead</Word>
+      <Word>スクリプト</Word>
+      <Word>script</Word>
+      <Word>ジャンプ</Word>
+      <Word>jump</Word>
+      <Word>キートリガー</Word>
+      <Word>keyTrigger</Word>
+      <Word>キートリガー初期化</Word>
+      <Word>keyTriggerReset</Word>
+      <Word>開く</Word>
+      <Word>open</Word>
+      <Word>データページ変更</Word>
+      <Word>savedataPage</Word>
+      <Word>スクリプト番号確認</Word>
+      <Word>checkScriptIndex</Word>
+    </Keywords>
+    <Keywords fontWeight="bold" foreground="DarkOrchid">
+      <Word>最終ジャンプ</Word>
+      <Word>finaljump</Word>
+    </Keywords>
+    <Keywords fontWeight="bold" foreground="Red">
+      <Word>マクロ</Word>
+      <Word>macro</Word>
+      <Word>マクロクリア</Word>
+      <Word>macroClear</Word>
+      <Word>lua</Word>
+    </Keywords>
+    <Keywords fontWeight="bold" foreground="DarkRed">
+      <Word>待機</Word>
+      <Word>wait</Word>
+    </Keywords>
+    <Keywords fontWeight="bold" foreground="DarkOrchid">
+      <Word>プリーロード</Word>
+      <Word>preLoad</Word>
+      <Word>未使用素材開放</Word>
+      <Word>releaseUnusedMemory</Word>
+      <Word>マウスカーソル</Word>
+      <Word>mouseCursor</Word>
+      <Word>ダイアログ</Word>
+      <Word>dialog</Word>
+      <Word>ダイアログ結果</Word>
+      <Word>dialogResult</Word>
+      <Word>ボタン単独活性化</Word>
+      <Word>btnsOnlyActive</Word>
+      <Word>ボタン全活性化</Word>
+      <Word>btnsAllActive</Word>
+      <Word>ボタン活性スタック</Word>
+      <Word>btnsActiveStack</Word>
+      <Word>砂時計</Word>
+      <Word>timer</Word>
+      <Word>ゲームエンド</Word>
+      <Word>endGame</Word>
+      <Word>クリア</Word>
+      <Word>clear</Word>
+      <Word>ボイス再生形式</Word>
+      <Word>voicePlayType</Word>
+      <Word>スクリーン</Word>
+      <Word>screen</Word>
+      <Word>文字スキップ方式</Word>
+      <Word>textSkipMode</Word>
+      <Word>セーブ</Word>
+      <Word>save</Word>
+      <Word>ロード</Word>
+      <Word>load</Word>
+      <Word>セーブ削除</Word>
+      <Word>savedelete</Word>
+      <Word>クイックセーブ</Word>
+      <Word>quickSave</Word>
+      <Word>クイックロード</Word>
+      <Word>quickLoad</Word>
+      <Word>セーブ除外範囲</Word>
+      <Word>noSaveRange</Word>
+      <Word>セーブ画像除外範囲</Word>
+      <Word>noSaveSSRange</Word>
+      <Word>スクリーンショット</Word>
+      <Word>screenshot</Word>
+      <Word>画像全体品質</Word>
+      <Word>imageDefaultQuality</Word>
+      <Word>イベント</Word>
+      <Word>event</Word>
+    </Keywords>
+    <!-- Images -->
+    <Keywords foreground="Red">
+      <Word>背景</Word>
+      <Word>bg</Word>
+      <Word>背景0</Word>
+      <Word>bg0</Word>
+      <Word>動画</Word>
+      <Word>movie</Word>
+      <Word>動画0</Word>
+      <Word>movie0</Word>
+    </Keywords>
+    <Keywords foreground="DodgerBlue">
+      <Word>絵</Word>
+      <Word>cg</Word>
+      <Word>絵0</Word>
+      <Word>cg0</Word>
+    </Keywords>
+    <Keywords foreground="MediumVioletRed">
+      <Word>ボタン</Word>
+      <Word>button</Word>
+      <Word>ボタン0</Word>
+      <Word>button0</Word>
+      <Word>ボタン文字</Word>
+      <Word>btnText</Word>
+      <Word>ボタン反応範囲</Word>
+      <Word>btnTouchArea</Word>
+      <Word>ボタン活性条件</Word>
+      <Word>btnActiveCondition</Word>
+      <Word>ボタンタッチ時</Word>
+      <Word>onBtnTouch</Word>
+      <Word>ボタン未タッチ時</Word>
+      <Word>onBtnNotTouch</Word>
+      <Word>タッチ素材設定</Word>
+      <Word>touchableRes</Word>
+      <Word>トラックバー</Word>
+      <Word>trackbar</Word>
+      <Word>トラックバー0</Word>
+      <Word>trackbar0</Word>
+    </Keywords>
+    <!-- Text Related -->
+    <Keywords fontWeight="bold" foreground="DarkOrchid">
+      <Word>バックログ設定</Word>
+      <Word>backlogConfig</Word>
+      <Word>バックログ台詞登録</Word>
+      <Word>backlogAddLines</Word>
+      <Word>続行時文字進行通常</Word>
+      <Word>restoreReadOnContinue</Word>
+    </Keywords>
+    <Keywords foreground="DarkOrchid">
+      <Word>文字窓</Word>
+      <Word>textbox</Word>
+      <Word>文字窓0</Word>
+      <Word>textbox0</Word>
+      <Word>使用文字窓</Word>
+      <Word>useTextbox</Word>
+      <Word>文章消去</Word>
+      <Word>textClear</Word>
+      <Word>文字フォント</Word>
+      <Word>textFont</Word>
+      <Word>文字サイズ</Word>
+      <Word>textSize</Word>
+      <Word>文字行サイズ</Word>
+      <Word>textLineSize</Word>
+      <Word>文字色</Word>
+      <Word>textColour</Word>
+      <Word>文字太字</Word>
+      <Word>textBold</Word>
+      <Word>文字斜体</Word>
+      <Word>textItalic</Word>
+      <Word>文字下線</Word>
+      <Word>textUnderline</Word>
+      <Word>文字取消線</Word>
+      <Word>textStrike</Word>
+      <Word>文字陰</Word>
+      <Word>textShadow</Word>
+      <Word>文字速度</Word>
+      <Word>textSpeed</Word>
+      <Word>文字ワードラップ</Word>
+      <Word>textWordWrap</Word>
+      <Word>文字窓スキン</Word>
+      <Word>textAutoIndent</Word>
+      <Word>文字自動送り</Word>
+      <Word>textDisallowStart</Word>
+      <Word>文字禁則行頭</Word>
+      <Word>textDisallowEnd</Word>
+      <Word>文字禁則行末</Word>
+      <Word>textExtraSpacing</Word>
+      <Word>文字追加間隔</Word>
+      <Word>textboxSkin</Word>
+      <Word>文字窓待機絵</Word>
+      <Word>textWaitIcon</Word>
+      <Word>文字出力効果</Word>
+      <Word>textFlowEffect</Word>
+      <Word>文字再度出力</Word>
+      <Word>textRedisplay</Word>
+      <Word>文字自動待機</Word>
+      <Word>textAutoWait</Word>
+      <Word>文字自動改行</Word>
+      <Word>textAutoNewline</Word>
+      <Word>文字進行</Word>
+      <Word>textProgress</Word>
+      <Word>文字方向</Word>
+      <Word>textDir</Word>
+      <Word>文字整列</Word>
+      <Word>textAlignment</Word>
+      <Word>文字</Word>
+      <Word>text</Word>
+      <Word>文字0</Word>
+      <Word>text0</Word>
+    </Keywords>
+    <!-- Audio Related -->
+    <Keywords foreground="Red">
+      <Word>背景音</Word>
+      <Word>背景音0</Word>
+      <Word>bgm</Word>
+      <Word>bgm0</Word>
+      <Word>効果音</Word>
+      <Word>効果音0</Word>
+      <Word>soundEffect</Word>
+      <Word>soundEffect0</Word>
+      <Word>ボイス</Word>
+      <Word>ボイス0</Word>
+      <Word>voice</Word>
+      <Word>voice0</Word>
+      <Word>ボイス再生</Word>
+      <Word>voiceReplay</Word>
+      <Word>音量</Word>
+      <Word>volume</Word>
+      <Word>音量2</Word>
+      <Word>volume2</Word>
+      <Word>背景ボイス</Word>
+      <Word>背景ボイス0</Word>
+      <Word>bgvoice</Word>
+      <Word>bgvoice0</Word>
+      <Word>一時停止</Word>
+      <Word>pause</Word>
+      <Word>再生続行</Word>
+      <Word>play</Word>
+      <Word>背景音自動継続</Word>
+      <Word>bgmAutoContinue</Word>
+      <Word>反復区間</Word>
+      <Word>loopRegion</Word>
+    </Keywords>
+    <Keywords foreground="Red">
+      <Word>自動ボイス登録</Word>
+      <Word>setAutoVoice</Word>
+      <Word>自動ボイス</Word>
+      <Word>自動ボイス0</Word>
+      <Word>autoVoice</Word>
+      <Word>autoVoice0</Word>
+    </Keywords>
+    <!-- Variable Related -->
+    <Keywords fontWeight="bold" foreground="Blue">
+      <Word>変数</Word>
+      <Word>var</Word>
+      <Word>もし</Word>
+      <Word>if</Word>
+      <Word>違ったら</Word>
+      <Word>else</Word>
+    </Keywords>
+    <Keywords fontWeight="bold" foreground="DarkOrchid">
+      <Word>保存変数</Word>
+      <Word>datavar</Word>
+      <Word>全域変数</Word>
+      <Word>globalvar</Word>
+      <Word>全域変数保存</Word>
+      <Word>saveGlobalVars</Word>
+    </Keywords>
+    <!-- Tween Related -->
+    <Keywords fontWeight="bold" foreground="Tomato">
+      <Word>親子</Word>
+      <Word>parentChild</Word>
+      <Word>アニメ登録</Word>
+      <Word>animation</Word>
+      <Word>アニメ登録簡易</Word>
+      <Word>animationEx</Word>
+      <Word>スクリーンイン</Word>
+      <Word>screenIn</Word>
+      <Word>スクリーンアウト</Word>
+      <Word>screenOut</Word>
+      <Word>イン</Word>
+      <Word>fadein</Word>
+      <Word>アウト</Word>
+      <Word>fadeout</Word>
+      <Word>カメラ初期化</Word>
+      <Word>cameraReset</Word>
+      <Word>特殊効果</Word>
+      <Word>shaderEffect</Word>
+      <Word>ブレンドモード</Word>
+      <Word>blendMode</Word>
+    </Keywords>
+    <Keywords foreground="Tomato">
+      <Word>カメラ無視</Word>
+      <Word>カメラ無視</Word>
+      <Word>透明無視</Word>
+      <Word>透明無視</Word>
+      <Word>ループ</Word>
+      <Word>loop</Word>
+      <Word>変化終了</Word>
+      <Word>tweenEnd</Word>
+      <Word>レイヤ</Word>
+      <Word>layer</Word>
+      <Word>画像</Word>
+      <Word>image</Word>
+      <Word>移動</Word>
+      <Word>move</Word>
+      <Word>回転</Word>
+      <Word>rotate</Word>
+      <Word>拡大</Word>
+      <Word>zoom</Word>
+      <Word>透明度</Word>
+      <Word>alpha</Word>
+      <Word>色調</Word>
+      <Word>rgb</Word>
+      <Word>hsl色調</Word>
+      <Word>hsl</Word>
+      <Word>移動2</Word>
+      <Word>move2</Word>
+      <Word>回転2</Word>
+      <Word>rotate2</Word>
+      <Word>拡大2</Word>
+      <Word>zoom2</Word>
+      <Word>透明度2</Word>
+      <Word>alpha2</Word>
+      <Word>色調2</Word>
+      <Word>rgb2</Word>
+      <Word>画像反転</Word>
+      <Word>inverse</Word>
+    </Keywords>
+    <Keywords fontWeight="bold" foreground="DarkBlue">
+      <Word>マスク</Word>
+      <Word>mask</Word>
+      <Word>マスク反映</Word>
+      <Word>applyMask</Word>
+    </Keywords>
+    <!-- Text Related -->
+    <Keywords fontWeight="bold" foreground="DarkBlue">
+      <Word>粒子発生器</Word>
+      <Word>particleMaker</Word>
+      <Word>粒子発生器0</Word>
+      <Word>particleMaker0</Word>
+    </Keywords>
+    <Keywords foreground="Tomato">
+      <Word>発生間隔範囲</Word>
+      <Word>spawnDelayRange</Word>
+      <Word>位置範囲</Word>
+      <Word>positionRange</Word>
+      <Word>回転範囲</Word>
+      <Word>rotationRange</Word>
+      <Word>拡大範囲</Word>
+      <Word>zoomRange</Word>
+      <Word>速度範囲</Word>
+      <Word>velocityRange</Word>
+      <Word>加速設定</Word>
+      <Word>acceleration</Word>
+      <Word>色範囲</Word>
+      <Word>RGBARange</Word>
+      <Word>終了回転範囲</Word>
+      <Word>endRotationRange</Word>
+      <Word>終了拡大範囲</Word>
+      <Word>endZoomRange</Word>
+      <Word>終了色範囲</Word>
+      <Word>endRGBARange</Word>
+    </Keywords>
+    <!-- ETC Related -->
+    <Keywords fontWeight="bold" foreground="Purple">
+      <Word>仮絵生成</Word>
+      <Word>createDummyCG</Word>
+      <Word>合成画像登録</Word>
+      <Word>textureCreate</Word>
+    </Keywords>
+  </RuleSet>
+</SyntaxDefinition>

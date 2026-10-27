@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Light.vn Visual Novel Engine</title>
+    <link rel="stylesheet" href="WebCore.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+    <!-- Note: the larger the width, the lower the fps -->
+    <h1>Light.vn Visual Novel Engine</h1>
+    <div id="container" class="fullsize">
+        <div id="sizer">
+            <div id="expander">
+                <div id="listener">
+                    <canvas id="canvas"></canvas>
+                    <div id="status">Initialization...</div>
+                    <div id="status-description"></div>
+                    <!-- These need to be in order. -->
+                    <script type="application/javascript" src="WebCore.js"></script>
+                    <script type="application/javascript" src="loader.js"></script>
+                    <script type="application/javascript" src="LightApp.js"></script>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

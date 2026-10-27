@@ -1,0 +1,70 @@
+
+// Event handlers
+// Call "スクリプト /Plugins/lvui_26/_system/events.txt register" from your init script.
+
+栞 register
+{
+    ダイアログスクリプト登録 /Plugins/lvui_26/_dialog/script.txt
+
+    // After loading a save, restore the play screen.
+    イベント load 後 スクリプト /Plugins/lvui_26/_system/events.txt load_after
+
+    // After rollback, show confirmation message.
+    イベント rollback 後 スクリプト /Plugins/lvui_26/_system/events.txt rollback_after
+
+    // When the window close button is pressed, ask for confirmation.
+    イベント close_signal 後 ダイアログ "ゲームを終了しますか？" ゲームエンド
+
+    // When "open" command is disallowed
+    イベント disallow_open 後 ダイアログ "外部実行がサポートされていない環境です。"
+
+    // When popups are disallowed
+    イベント disallow_popups 後 ダイアログ "アラート発生。ログに記録しました。"
+}
+スクリプト終了
+
+//----------------------------------------------------------------------
+// Restore the play screen after loading a save file.
+
+栞 load_after
+{
+    ~絵 event_black /Plugins/lvui_26/res/black_full_1280.png 0 0 400 カメラ付着
+
+    // After load, rendering is disabled by default — re-enable it.
+    描画許可 true
+
+    待機 300
+
+    アウト sys.* 全画面領域
+
+    // Resume all paused effects (across all screenspaces).
+    再生続行 "(?!vn_sysBGM).*" 全画面領域
+
+    アウト event_black 300 全画面領域
+
+    スクリプト /Plugins/lvui_26/_system/textbox.txt txt_show
+
+    // Restore normal text advance mode.
+    文字進行通常強制 false
+
+    // After load, input is disabled by default — re-enable it.
+    入力禁止 false
+}
+スクリプト終了
+// Return to the bottom-most script.
+//スクリプト終了原点回帰
+
+//----------------------------------------------------------------------
+// Show a brief message after rollback completes.
+
+栞 rollback_after
+{
+    描画許可 true
+
+    // Use sys_ prefix so the object is excluded from saves.
+    ~文字0 sys_rollback_text 1021 33 401 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 28 カメラ付着 "ロールバック完了" | イン sys_rollback_text 300
+    演出目録追加 sys_rollback_text 800 アウト sys_rollback_text 300
+
+    入力禁止 false
+}
+スクリプト終了原点回帰

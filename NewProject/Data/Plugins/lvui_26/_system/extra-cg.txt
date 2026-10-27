@@ -1,0 +1,312 @@
+
+// Extra: CG Gallery
+
+栞 extra_in_first
+画面領域開始 sys_extra 原点回帰時解除
+
+栞 extra_in
+画面領域上書き sys_extra_cg
+スクリプト /Plugins/lvui_26/_system/extra-pages.txt extra_change
+
+栞 extra_btns
+自動カメラ付着 true
+
+絵 sysxheader_bg /Plugins/lvui_26/res/Config/Config_Img_BG.png 0 0 302
+絵 sysxheader_title /Plugins/lvui_26/res/Extra/Extra_Img_Title.png 0 0 303
+
+タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Btn_Exit_01.png /Plugins/lvui_26/res/Config/Config_Btn_Exit_02.png /Plugins/lvui_26/res/Config/Config_Btn_Exit_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system46.ogg
+ボタン sysxheader_close 1225 9 305 ジャンプ extra_close
+
+// Tab bar — CG selected
+~タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Btn_Cg_Selected.png /Plugins/lvui_26/res/Extra/Extra_Btn_Cg_Selected.png /Plugins/lvui_26/res/Extra/Extra_Btn_Cg_Selected.png
+~ボタン sysxheader_tab_cg 400 14 305
+~タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Btn_Replay_01.png /Plugins/lvui_26/res/Extra/Extra_Btn_Replay_02.png /Plugins/lvui_26/res/Extra/Extra_Btn_Replay_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+~ボタン sysxheader_tab_replay 520 14 305 ジャンプ /Plugins/lvui_26/_system/extra-replay.txt extra_in
+~タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Btn_Ost_01.png /Plugins/lvui_26/res/Extra/Extra_Btn_Ost_02.png /Plugins/lvui_26/res/Extra/Extra_Btn_Ost_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+~ボタン sysxheader_tab_ost 640 14 305 ジャンプ /Plugins/lvui_26/_system/extra-ost.txt extra_in
+~タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Btn_Ending_01.png /Plugins/lvui_26/res/Extra/Extra_Btn_Ending_02.png /Plugins/lvui_26/res/Extra/Extra_Btn_Ending_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+~ボタン sysxheader_tab_ending 760 14 305 ジャンプ /Plugins/lvui_26/_system/extra-ending.txt extra_in
+
+// State
+もし (cg_cur_page == undefined) 臨時全域変数 cg_cur_page = 1
+
+// CG slots
+絵0 sysx_cg_0 /Plugins/lvui_26/res/Extra/Extra_Cg_Slot_Empty.png 48 103 304
+絵0 sysx_cg_1 /Plugins/lvui_26/res/Extra/Extra_Cg_Slot_Empty.png 344 103 304
+絵0 sysx_cg_2 /Plugins/lvui_26/res/Extra/Extra_Cg_Slot_Empty.png 641 103 304
+絵0 sysx_cg_3 /Plugins/lvui_26/res/Extra/Extra_Cg_Slot_Empty.png 937 103 304
+絵0 sysx_cg_4 /Plugins/lvui_26/res/Extra/Extra_Cg_Slot_Empty.png 48 282 304
+絵0 sysx_cg_5 /Plugins/lvui_26/res/Extra/Extra_Cg_Slot_Empty.png 344 282 304
+絵0 sysx_cg_6 /Plugins/lvui_26/res/Extra/Extra_Cg_Slot_Empty.png 641 282 304
+絵0 sysx_cg_7 /Plugins/lvui_26/res/Extra/Extra_Cg_Slot_Empty.png 937 282 304
+絵0 sysx_cg_8 /Plugins/lvui_26/res/Extra/Extra_Cg_Slot_Empty.png 48 460 304
+絵0 sysx_cg_9 /Plugins/lvui_26/res/Extra/Extra_Cg_Slot_Empty.png 344 460 304
+絵0 sysx_cg_10 /Plugins/lvui_26/res/Extra/Extra_Cg_Slot_Empty.png 641 460 304
+絵0 sysx_cg_11 /Plugins/lvui_26/res/Extra/Extra_Cg_Slot_Empty.png 937 460 304
+
+.イン sysx_.* 300
+
+スクリプト 現在 fadein_page (cg_cur_page)
+
+キーダウン r.click ジャンプ extra_close
+
+待機 続行禁止
+
+栞 extra_close
+{
+    アウト sysx_cg_.*_in 0
+    スクリプト /Plugins/lvui_26/_system/extra-pages.txt extra_out
+    画面領域終了 sys_extra_cg
+}
+スクリプト終了
+
+//---------------------------------------------------------------
+// Bottom page bar
+栞 display_page_buttons
+{
+    描画許可 false
+    {
+        アウト sysx_page_.* 0
+
+        自動カメラ付着 true
+    
+        タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Cg_Page_01_01.png /Plugins/lvui_26/res/Extra/Extra_Cg_Page_01_02.png /Plugins/lvui_26/res/Extra/Extra_Cg_Page_01_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+        もし (cg_cur_page == 1) 絵 sysx_page_1 /Plugins/lvui_26/res/Extra/Extra_Cg_Page_01_Selected.png 340 663 305
+        違ったら                ボタン sysx_page_1 340 663 305 スクリプト 現在 set_page 1
+    
+        タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Cg_Page_02_01.png /Plugins/lvui_26/res/Extra/Extra_Cg_Page_02_02.png /Plugins/lvui_26/res/Extra/Extra_Cg_Page_02_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+        もし (cg_cur_page == 2) 絵 sysx_page_2 /Plugins/lvui_26/res/Extra/Extra_Cg_Page_02_Selected.png 398 663 305
+        違ったら                ボタン sysx_page_2 398 663 305 スクリプト 現在 set_page 2
+    
+        タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Cg_Page_03_01.png /Plugins/lvui_26/res/Extra/Extra_Cg_Page_03_02.png /Plugins/lvui_26/res/Extra/Extra_Cg_Page_03_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+        もし (cg_cur_page == 3) 絵 sysx_page_3 /Plugins/lvui_26/res/Extra/Extra_Cg_Page_03_Selected.png 456 663 305
+        違ったら                ボタン sysx_page_3 456 663 305 スクリプト 現在 set_page 3
+    
+        タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Cg_Page_04_01.png /Plugins/lvui_26/res/Extra/Extra_Cg_Page_04_02.png /Plugins/lvui_26/res/Extra/Extra_Cg_Page_04_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+        もし (cg_cur_page == 4) 絵 sysx_page_4 /Plugins/lvui_26/res/Extra/Extra_Cg_Page_04_Selected.png 514 663 305
+        違ったら                ボタン sysx_page_4 514 663 305 スクリプト 現在 set_page 4
+    
+        タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Cg_Page_05_01.png /Plugins/lvui_26/res/Extra/Extra_Cg_Page_05_02.png /Plugins/lvui_26/res/Extra/Extra_Cg_Page_05_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+        もし (cg_cur_page == 5) 絵 sysx_page_5 /Plugins/lvui_26/res/Extra/Extra_Cg_Page_05_Selected.png 572 663 305
+        違ったら                ボタン sysx_page_5 572 663 305 スクリプト 現在 set_page 5
+    
+        タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Cg_Page_06_01.png /Plugins/lvui_26/res/Extra/Extra_Cg_Page_06_02.png /Plugins/lvui_26/res/Extra/Extra_Cg_Page_06_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+        もし (cg_cur_page == 6) 絵 sysx_page_6 /Plugins/lvui_26/res/Extra/Extra_Cg_Page_06_Selected.png 630 663 305
+        違ったら                ボタン sysx_page_6 630 663 305 スクリプト 現在 set_page 6
+    
+        タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Cg_Page_07_01.png /Plugins/lvui_26/res/Extra/Extra_Cg_Page_07_02.png /Plugins/lvui_26/res/Extra/Extra_Cg_Page_07_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+        もし (cg_cur_page == 7) 絵 sysx_page_7 /Plugins/lvui_26/res/Extra/Extra_Cg_Page_07_Selected.png 688 663 305
+        違ったら                ボタン sysx_page_7 688 663 305 スクリプト 現在 set_page 7
+    
+        タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Cg_Page_08_01.png /Plugins/lvui_26/res/Extra/Extra_Cg_Page_08_02.png /Plugins/lvui_26/res/Extra/Extra_Cg_Page_08_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+        もし (cg_cur_page == 8) 絵 sysx_page_8 /Plugins/lvui_26/res/Extra/Extra_Cg_Page_08_Selected.png 746 663 305
+        違ったら                ボタン sysx_page_8 746 663 305 スクリプト 現在 set_page 8
+    
+        タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Cg_Page_09_01.png /Plugins/lvui_26/res/Extra/Extra_Cg_Page_09_02.png /Plugins/lvui_26/res/Extra/Extra_Cg_Page_09_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+        もし (cg_cur_page == 9) 絵 sysx_page_9 /Plugins/lvui_26/res/Extra/Extra_Cg_Page_09_Selected.png 804 663 305
+        違ったら                ボタン sysx_page_9 804 663 305 スクリプト 現在 set_page 9
+    
+        タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Cg_Page_10_01.png /Plugins/lvui_26/res/Extra/Extra_Cg_Page_10_02.png /Plugins/lvui_26/res/Extra/Extra_Cg_Page_10_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+        もし (cg_cur_page == 10) 絵 sysx_page_10 /Plugins/lvui_26/res/Extra/Extra_Cg_Page_10_Selected.png 862 663 305
+        違ったら                 ボタン sysx_page_10 862 663 305 スクリプト 現在 set_page 10
+    }
+    描画許可 true
+}
+スクリプト終了
+
+//---------------------------------------------------------------
+// Page transitions
+栞 fadein_page _num
+{
+    スクリプト 現在 set_page (_num) 300
+}
+スクリプト終了
+
+栞 set_page _num
+{
+    入力禁止 true
+
+    .アウト sysx_cg_.*_in 150
+
+    もし (_num == 1) スクリプト 現在 page1
+    違ってももし (_num == 2) スクリプト 現在 page2
+    違ってももし (_num == 3) スクリプト 現在 page3
+    違ってももし (_num == 4) スクリプト 現在 page4
+    違ってももし (_num == 5) スクリプト 現在 page5
+    違ってももし (_num == 6) スクリプト 現在 page6
+    違ってももし (_num == 7) スクリプト 現在 page7
+    違ってももし (_num == 8) スクリプト 現在 page8
+    違ってももし (_num == 9) スクリプト 現在 page9
+    違ってももし (_num == 10) スクリプト 現在 page10
+
+    スクリプト 現在 display_page_buttons
+
+    .イン sysx_cg_.*_in 300
+
+    入力禁止 false
+}
+スクリプト終了
+
+//---------------------------------------------------------------
+// Page 1
+栞 page1
+{
+    臨時全域変数 cg_cur_page = 1
+    自動カメラ付着 true
+
+     ~タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Cg_Slot_Line.png /Plugins/lvui_26/res/Extra/Extra_Cg_Slot_Over.png /Plugins/lvui_26/res/Extra/Extra_Cg_Slot_Over.png
+    {
+        栞 cg_tut_text
+        もし (cg_tut_text == undefined) ジャンプ cg_tut_basic
+        {
+            絵0 sysx_cg_0_frame_in /Plugins/lvui_26/res/Extra/Extra_Cg_Slot_Frame.png 48 103 305
+            絵0 sysx_cg_0_in cg/Extra_Cg_Thumb_03.png 55 106 306
+            ~ボタン0 sysx_cg_0_over_in 48 106 307 スクリプト 現在 display_cg "cg/cg_tut_text_00.png" "cg/cg_tut_text_01.png"
+        }
+
+        栞 cg_tut_basic
+        もし (cg_tut_basic == undefined) ジャンプ cg_tut_3d
+        {
+            絵0 sysx_cg_1_frame_in /Plugins/lvui_26/res/Extra/Extra_Cg_Slot_Frame.png 344 103 305
+            絵0 sysx_cg_1_in cg/Extra_Cg_Thumb_01.png 351 106 306
+            ~ボタン0 sysx_cg_1_over_in 344 106 307 スクリプト 現在 display_cg "cg/cg_tut_basic.png"
+        }
+
+        栞 cg_tut_3d
+        もし (cg_tut_3d == undefined) ジャンプ cg_tut_overall
+        {
+            絵0 sysx_cg_2_frame_in /Plugins/lvui_26/res/Extra/Extra_Cg_Slot_Frame.png 641 103 305
+            絵0 sysx_cg_2_in cg/Extra_Cg_Thumb_00.png 648 106 306
+            ~ボタン0 sysx_cg_2_over_in 641 106 307 スクリプト 現在 display_cg "cg/cg_tut_3d.png"
+        }
+
+        栞 cg_tut_overall
+        もし (cg_tut_overall == undefined) ジャンプ cg_el_sky
+        {
+            絵0 sysx_cg_3_frame_in /Plugins/lvui_26/res/Extra/Extra_Cg_Slot_Frame.png 937 103 305
+            絵0 sysx_cg_3_in cg/Extra_Cg_Thumb_02.png 944 106 306
+            ~ボタン0 sysx_cg_3_over_in 937 106 307 スクリプト 現在 display_cg "cg/cg_tut_overall.png"
+        }
+
+        栞 cg_el_sky
+        もし (cg_el_sky == undefined) ジャンプ cg_end
+        {
+            絵0 sysx_cg_4_frame_in /Plugins/lvui_26/res/Extra/Extra_Cg_Slot_Frame.png 48 282 305
+            絵0 sysx_cg_4_in cg/Extra_Cg_Thumb_04.png 55 285 306
+            ~ボタン0 sysx_cg_4_over_in 48 282 307 スクリプト 現在 display_cg "cg/LX_wide.png"
+        }
+    }
+
+    栞 cg_end
+}
+スクリプト終了
+
+//---------------------------------------------------------------
+// Pages 2-10 — empty stubs for content
+栞 page2
+{
+    臨時全域変数 cg_cur_page = 2
+    自動カメラ付着 true
+}
+スクリプト終了
+
+栞 page3
+{
+    臨時全域変数 cg_cur_page = 3
+    自動カメラ付着 true
+}
+スクリプト終了
+
+栞 page4
+{
+    臨時全域変数 cg_cur_page = 4
+    自動カメラ付着 true
+}
+スクリプト終了
+
+栞 page5
+{
+    臨時全域変数 cg_cur_page = 5
+    自動カメラ付着 true
+}
+スクリプト終了
+
+栞 page6
+{
+    臨時全域変数 cg_cur_page = 6
+    自動カメラ付着 true
+}
+スクリプト終了
+
+栞 page7
+{
+    臨時全域変数 cg_cur_page = 7
+    自動カメラ付着 true
+}
+スクリプト終了
+
+栞 page8
+{
+    臨時全域変数 cg_cur_page = 8
+    自動カメラ付着 true
+}
+スクリプト終了
+
+栞 page9
+{
+    臨時全域変数 cg_cur_page = 9
+    自動カメラ付着 true
+}
+スクリプト終了
+
+栞 page10
+{
+    臨時全域変数 cg_cur_page = 10
+    自動カメラ付着 true
+}
+スクリプト終了
+
+//---------------------------------------------------------------
+// CG viewer
+
+栞 display_cg _cg1 _cg2 _cg3
+{
+    画面領域開始 sys_extra_cg_display
+    
+    自動カメラ付着 true
+
+    キーダウン l.click 続行
+    キーダウン r.click ジャンプ display_end
+    
+    変数 cg_total = 0
+    もし (_cg1 != undefined) 変数 cg_total += 1
+    もし (_cg2 != undefined) 変数 cg_total += 1
+    もし (_cg3 != undefined) 変数 cg_total += 1
+    
+    もし (_cg1 == undefined) ジャンプ display_error
+    文字 ecg_displaytext 1180 673 820 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 44 中央 "1 / {{cg_total}}"
+    背景0 ecg_display1 (_cg1) 0 0 720 | .イン ecg_display1 300
+    待機
+    
+    もし (_cg2 == undefined) ジャンプ display_end
+    文字 ecg_displaytext 1180 673 820 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 44 中央 "2 / {{cg_total}}"
+    背景0 ecg_display2 (_cg2) 0 0 721 | .イン ecg_display2 300
+    待機
+    
+    もし (_cg3 == undefined) ジャンプ display_end
+    文字 ecg_displaytext 1180 673 820 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 44 中央 "3 / {{cg_total}}"
+    背景0 ecg_display3 (_cg3) 0 0 722 | .イン ecg_display3 300
+    待機
+    
+}
+ジャンプ display_end
+
+栞 display_error
+システムエラ "_cg1が存在しません。"
+
+栞 display_end
+{
+    .アウト 画面領域 300
+    画面領域終了 sys_extra_cg_display
+}
+スクリプト終了

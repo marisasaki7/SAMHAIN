@@ -1,0 +1,13 @@
+
+// Key bindings
+// Called from textbox.txt to register input handlers.
+
+栞 続行指定
+{
+    キーダウン wheel.down "続行 | スクリプト /Plugins/lvui_26/_system/textbox.txt txt_reveal"
+    キーダウン l.click "続行 | スクリプト /Plugins/lvui_26/_system/textbox.txt txt_reveal"
+    キーダウン enter "続行 | スクリプト /Plugins/lvui_26/_system/textbox.txt txt_reveal"
+
+    キーダウン q ロールバック
+}
+スクリプト終了

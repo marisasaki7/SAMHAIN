@@ -1,0 +1,16 @@
+// --------------------------------------------------------
+//
+// Add filepaths or folders of 
+// assets you don't want encrypted on deployment.
+// (add each filepath / folder on a new line)
+// 
+// ex：Scripts/scenario/        <- excludes entire folder
+// ex：Images/extra/extra0.png
+//
+// --------------------------------------------------------
+
+// ex. to allow audience to freely 
+//     translate the csv scenario files
+Scripts/scenario_tables/
+
+Images/light_splash_1280.png

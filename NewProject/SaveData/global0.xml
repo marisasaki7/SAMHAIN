@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<GlobalVars>
+	<vnvar name="my_txtbox_alpha" range="GLOBAL" created_at="/Scripts/title.txt:8">
+		<value>
+			<value type="INTEGER" identifier="my_txtbox_alpha">
+				<_value index="1" alt="255" />
+			</value>
+		</value>
+	</vnvar>
+</GlobalVars>
+<ReadTracker />

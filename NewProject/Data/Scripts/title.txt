@@ -1,0 +1,67 @@
+
+script /Plugins/lvui_26/_system/events.txt register
+script /Plugins/lvui_26/_system/menu.txt
+script /Plugins/lvui_26/_system/macros.txt
+
+~bg0 id_bg_background_SalaDeAula_0 bg/background_SalaDeAula.png | .fadein id_bg_background_SalaDeAula_0 600 a3
+
+
+
+
+~cg0 SAMHAIN_Logo UI/SPR_MainMenuTitle.png 00 00 1 | zoom SAMHAIN_Logo 170%
+move SAMHAIN_Logo 80 130 1
+.fadein SAMHAIN_Logo 1500
+
+wait 500
+
+
+bookmark titleButtons
+
+{
+
+    fadeout buttons.*
+    
+    ~cg0 Title_Circle UI/SPR_MainMenuCircle.png 80 155 2 | zoom Title_Circle 140% | move Title_Circle 80 145 2 | .fadein Title_Circle 600 a3
+
+touchableRes UI/SPR_NewGameButton.png UI/SPR_NewGameButtonS.png UI/SPR_NewGameButtonSE.png
+button0 buttonsNewGame 363 355 5 | zoom buttonsNewGame 130% | 
+
+touchableRes UI/SPR_CreditsButton.png UI/SPR_CreditsButtonS.png UI/SPR_CreditsButtonSE.png
+button0 buttonsCredits 415 263 3 | zoom buttonsCredits 130%  | 
+
+touchableRes UI/SPR_ExitButton.png UI/SPR_ExitButtonS.png UI/SPR_ExitButtonSE.png
+button0 buttonsExit 372 423 5 | zoom buttonsExit 130% | 
+
+touchableRes UI/SPR_MainMenuEmptyButton.png UI/SPR_MainMenuEmptyButton.png UI/SPR_MainMenuEmptyButton.png
+button0 buttonsEmpty 341 266 6 | zoom buttonsEmpty 130% | 
+
+
+touchableRes UI/SPR_LoadButton.png UI/SPR_LoadButtonS.png UI/SPR_LoadButtonSE.png
+button0 buttonsLoad 254 383 5 | zoom buttonsLoad 140% | 
+
+
+touchableRes UI/SPR_ConfigButton.png UI/SPR_ConfigButtonS.png UI/SPR_ConfigButtonSE.png
+button0 buttonsConfig 450 385 5 | zoom buttonsConfig 130% | 
+
+
+
+
+
+
+  
+
+.fadein buttons.* 500
+    
+}
+
+wait preventContinueRead
+
+
+
+
+
+
+
+
+
+

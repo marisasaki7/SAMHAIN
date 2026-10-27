@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<BasketNovel>
+	<Settings Width="1280" Height="720" NovelTitle="Light.vn Story" InitialScript="" MsgboxScript="" ApplicationSize="Window" UseCompressedRes="true" EditorStringFile="Strings_editor.xml" CommandFile="Commands.xml" SyntaxFile="Syntax_core.xshd" disableDebugLog="False" Icon="" sysProjectFolder="Light.vn_Story" sysMemoryManagementType="2" writeDirectoryType="0" displayFPS="true" lang="jap" logDuringSkip="" AppUserResizePolicy="" WindowSizeAdjustable="false" WindowBorderless="false" copy_dialogue_to_clipboard="false" disallowOpen="false" disallowPopups="false" FixedUpdateMethod="0" cap_update_dt_to_fixed_update_dt="false" WindowSizeAllowFreeRatio="" TextAutoWaitMethodDefault="2" Version="" />
+	<GameSettings vn_sysTextSkipMethod="0" vn_sysWindowMode="1" vn_sysVoicePlayType="1" vn_win_width="1280" vn_win_height="720" />
+</BasketNovel>

@@ -1,0 +1,2 @@
+#pragma once
+#define SECORE_BUILD_VERSION "17.9.2"

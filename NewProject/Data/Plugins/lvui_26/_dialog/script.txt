@@ -1,0 +1,87 @@
+
+// Dialog
+// Registered via: ダイアログスクリプト登録 /Plugins/lvui_26/_dialog/script.txt
+
+栞 msg_in
+
+画面領域開始 sys_message
+
+文字進行通常強制 true
+
+自動カメラ付着 true
+
+// Background frame
+絵0 sysmsgbox /Plugins/lvui_26/res/Common/Common_Popup_Frame.png 311 278 855
+.イン sysmsgbox 300
+
+//------------------------------------------------------
+// Message text and buttons
+
+栞 msg_buttons
+
+// Display message (vn_msg_str is set by the engine)
+文字0 sysmsg_str 640 330 857 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 24 中央 "{{vn_msg_str}}"
+文字色 sysmsg_str 80 80 80 | 文字陰 sysmsg_str 0
+
+// OK button
+タッチ素材設定 /Plugins/lvui_26/res/Common/Common_Popup_Btn_Ok_01.png /Plugins/lvui_26/res/Common/Common_Popup_Btn_Ok_02.png /Plugins/lvui_26/res/Common/Common_Popup_Btn_Ok_02.png /Plugins/lvui_26/res/se_maoudamashii_system29.ogg /Plugins/lvui_26/res/se_maoudamashii_onepoint23.ogg
+~ボタン0 sysmsg_btn_yes 370 361 856 ジャンプ msg_out_result_yes
+
+// Cancel button
+タッチ素材設定 /Plugins/lvui_26/res/Common/Common_Popup_Btn_Cancle_01.png /Plugins/lvui_26/res/Common/Common_Popup_Btn_Cancle_02.png /Plugins/lvui_26/res/Common/Common_Popup_Btn_Cancle_02.png /Plugins/lvui_26/res/se_maoudamashii_system29.ogg /Plugins/lvui_26/res/se_maoudamashii_onepoint22.ogg
+~ボタン0 sysmsg_btn_no 640 361 856 ジャンプ msg_out_result_no
+
+// カーソルがボタンにくるように。
+// Windows以外だと動作しない。
+移動 vn_mousecursor 500 390 150 a1 全画面領域
+
+// Animate buttons
+拡大 sysmsg_.* 90%
+イン sysmsg_.* 150
+.拡大 sysmsg_.* 100% 150 a1
+
+待機 ボタン選択 sysmsg_btn
+
+//------------------------------------------------------
+// Result: Cancel
+
+栞 msg_out_result_no
+{
+    アウト sysmsg_.*
+
+    .アウト 画面領域 300
+
+    もし (メニュー表示中 != true) ジャンプ msg_out_result_no_continue
+    .透明度 menu.* 255 300 全画面領域
+
+    栞 msg_out_result_no_continue
+
+    文字進行通常強制 false
+
+    画面領域終了 sys_message
+
+    ダイアログ結果 no
+}
+スクリプト終了
+
+//------------------------------------------------------
+// Result: OK
+
+栞 msg_out_result_yes
+{
+    .アウト sysmsg_.* 150
+
+    .アウト 画面領域 300
+
+    もし (メニュー表示中 != true) ジャンプ msg_out_result_yes_continue
+    .透明度 menu.* 255 300 全画面領域
+
+    栞 msg_out_result_yes_continue
+
+    文字進行通常強制 false
+
+    画面領域終了 sys_message
+
+    ダイアログ結果 yes
+}
+スクリプト終了

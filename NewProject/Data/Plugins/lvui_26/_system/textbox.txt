@@ -1,0 +1,349 @@
+
+//-------------------------------------------------------------------------------
+// Textbox
+//-------------------------------------------------------------------------------
+
+クリア色 255 255 255
+
+~//---------------------------------------------------------------
+
+栞 cache
+{
+    // Font is used continuously, so cache permanently.
+    プリーロード /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 永久
+    アニメ登録簡易 sys_wait_icon 1 /Plugins/lvui_26/res/Chat/Cursor_%02d.png 1 21 1 21 1 30
+}
+スクリプト終了
+
+~//---------------------------------------------------------------
+~//---------------------------------------------------------------
+クリア
+
+栞 default
+{
+    スクリプト /Plugins/lvui_26/_system/cache.txt
+    もし (my_txtbox_alpha == undefined) 全域変数 my_txtbox_alpha = 255
+
+    自動カメラ付着 true
+
+    // Textbox setup
+    文字窓0 txtbox 292 563 100 824 150 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 22
+    使用文字窓 txtbox
+    文字太字 false
+    文字陰 1 1 #000000 //0 0 1
+    文字行サイズ 33
+    文字ワードラップ false
+    文字窓スキン /Plugins/lvui_26/res/Chat/Chat_Frame.png -292 -276
+    文字方向 横
+    文字色 #ffffff
+    文字出力効果 8
+    文字読後透明度 125 100
+    透明度変数 txtbox_skin my_txtbox_alpha
+
+    // Wait cursor animation
+    アニメ登録簡易 sys_wait_icon 1 /Plugins/lvui_26/res/Chat/Cursor_%02d.png 1 21 1 21 1 30
+    文字窓待機絵 0 sys_wait_icon 10 7
+
+    拡大 txtbox 105% 105%
+    拡大 txtbox 100% 200
+    .イン txtbox 300
+
+    // Buttons
+    文字進行形式 0
+    
+    横箱0 txtbox_btn_box 920 710 101 1000 0 5
+    {
+        タッチ素材設定 /Plugins/lvui_26/res/Chat/Chat_Btn_Skip_01.png /Plugins/lvui_26/res/Chat/Chat_Btn_Skip_02.png /Plugins/lvui_26/res/Chat/Chat_Btn_Skip_02.png /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/se_maoudamashii_system47.ogg
+        ボタン txtbox_btn_tSkip 0 0 0 スクリプト /Plugins/lvui_26/_system/textbox.txt txt_skipToggle
+        ハイライト条件 txtbox_btn_tSkip "vn_sysTextSkipOn == true"
+        親子 txtbox_btn_box txtbox_btn_tSkip
+    
+        タッチ素材設定 /Plugins/lvui_26/res/Chat/Chat_Btn_Auto_01.png /Plugins/lvui_26/res/Chat/Chat_Btn_Auto_02.png /Plugins/lvui_26/res/Chat/Chat_Btn_Auto_02.png /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/se_maoudamashii_system47.ogg
+        ボタン txtbox_btn_tAuto 0 0 0 スクリプト /Plugins/lvui_26/_system/textbox.txt txt_autoToggle
+        ハイライト条件 txtbox_btn_tAuto "vn_sysTextAutoOn == true"
+        親子 txtbox_btn_box txtbox_btn_tAuto
+    
+        タッチ素材設定 /Plugins/lvui_26/res/Chat/Chat_Btn_Replay_01.png /Plugins/lvui_26/res/Chat/Chat_Btn_Replay_02.png /Plugins/lvui_26/res/Chat/Chat_Btn_Replay_02.png /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/se_maoudamashii_system47.ogg
+        ボタン txtbox_btn_tReplay 0 0 0 ボイス再生
+        親子 txtbox_btn_box txtbox_btn_tReplay
+    
+        タッチ素材設定 /Plugins/lvui_26/res/Chat/Chat_Btn_Log_01.png /Plugins/lvui_26/res/Chat/Chat_Btn_Log_02.png /Plugins/lvui_26/res/Chat/Chat_Btn_Log_02.png /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/se_maoudamashii_system47.ogg
+        ボタン txtbox_btn_tBacklog 0 0 0 スクリプト /Plugins/lvui_26/_system/backlog.txt log_display
+        親子 txtbox_btn_box txtbox_btn_tBacklog
+    
+        もし (g_scene_replay == true) ジャンプ default_fin
+    
+        タッチ素材設定 /Plugins/lvui_26/res/Chat/Chat_Btn_Qsave_01.png /Plugins/lvui_26/res/Chat/Chat_Btn_Qsave_02.png /Plugins/lvui_26/res/Chat/Chat_Btn_Qsave_02.png /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/se_maoudamashii_system47.ogg
+        ボタン txtbox_btn_tqSave 0 0 0 クイックセーブ 245 130
+        親子 txtbox_btn_box txtbox_btn_tqSave
+    
+        タッチ素材設定 /Plugins/lvui_26/res/Chat/Chat_Btn_Qload_01.png /Plugins/lvui_26/res/Chat/Chat_Btn_Qload_02.png /Plugins/lvui_26/res/Chat/Chat_Btn_Qload_02.png /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/se_maoudamashii_system47.ogg
+        ボタン txtbox_btn_tqLoad 0 0 0 スクリプト /Plugins/lvui_26/_system/textbox.txt run_quickload
+        親子 txtbox_btn_box txtbox_btn_tqLoad
+    
+        タッチ素材設定 /Plugins/lvui_26/res/Chat/Chat_Btn_Menu_01.png /Plugins/lvui_26/res/Chat/Chat_Btn_Menu_02.png /Plugins/lvui_26/res/Chat/Chat_Btn_Menu_02.png /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/se_maoudamashii_system47.ogg
+        ボタン txtbox_btn_tMenu 0 0 0 スクリプト /Plugins/lvui_26/_system/menu.txt menu_show
+        親子 txtbox_btn_box txtbox_btn_tMenu
+    
+        タッチ素材設定 /Plugins/lvui_26/res/Chat/Chat_Btn_Close_01.png /Plugins/lvui_26/res/Chat/Chat_Btn_Close_02.png /Plugins/lvui_26/res/Chat/Chat_Btn_Close_02.png /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/se_maoudamashii_system47.ogg
+        ボタン txtbox_btn_tClose 0 0 0 スクリプト /Plugins/lvui_26/_system/textbox.txt txt_visibleToggle
+        親子 txtbox_btn_box txtbox_btn_tClose
+    }
+    
+
+    栞 default_fin
+
+    .イン txtbox_btn_box 0
+
+    // Tooltip images
+    タッチ開始時 txtbox_btn_tSkip "絵 sys_tooltip /Plugins/lvui_26/res/Chat/Chat_Btn_Skip_Tooltip.png 898 694 102 カメラ付着"
+    タッチ開始時 txtbox_btn_tAuto "絵 sys_tooltip /Plugins/lvui_26/res/Chat/Chat_Btn_Auto_Tooltip.png 943 694 102 カメラ付着"
+    タッチ開始時 txtbox_btn_tReplay "絵 sys_tooltip /Plugins/lvui_26/res/Chat/Chat_Btn_Replay_Tooltip.png 988 694 102 カメラ付着"
+    タッチ開始時 txtbox_btn_tBacklog "絵 sys_tooltip /Plugins/lvui_26/res/Chat/Chat_Btn_Log_Tooltip.png 1033 694 102 カメラ付着"
+    タッチ開始時 txtbox_btn_tqSave "絵 sys_tooltip /Plugins/lvui_26/res/Chat/Chat_Btn_Qsave_Tooltip.png 1078 694 102 カメラ付着"
+    タッチ開始時 txtbox_btn_tqLoad "絵 sys_tooltip /Plugins/lvui_26/res/Chat/Chat_Btn_Qload_Tooltip.png 1123 694 102 カメラ付着"
+    タッチ開始時 txtbox_btn_tMenu "絵 sys_tooltip /Plugins/lvui_26/res/Chat/Chat_Btn_Menu_Tooltip.png 1168 694 102 カメラ付着"
+    タッチ開始時 txtbox_btn_tClose "絵 sys_tooltip /Plugins/lvui_26/res/Chat/Chat_Btn_Close_Tooltip.png 1213 694 102 カメラ付着"
+    タッチ終了時 txtbox_btn_.* "アウト sys_tooltip"
+
+    //ctrl: skip, enter: continue, etc.
+    スクリプト /Plugins/lvui_26/_system/textbox.txt txt_setToggles
+    スクリプト /Plugins/lvui_26/_system/textbox.txt name_none
+}
+スクリプト終了
+
+~//---------------------------------------------------------------
+~//---------------------------------------------------------------
+クリア
+
+栞 large
+{
+    スクリプト /Plugins/lvui_26/_system/textbox.txt cache
+    もし (my_txtbox_alpha == undefined) 全域変数 my_txtbox_alpha = 255
+
+    自動カメラ付着 true
+
+    文字窓0 txtbox 200 160 90 824 500 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 28
+    使用文字窓 txtbox
+    文字窓スキン /Plugins/lvui_26/sys2/Chat_Frame_Full.png -200 -160
+    透明度 txtbox_skin 180
+    文字方向 横
+    文字色 txtbox 254 254 254
+    文字陰 txtbox 0
+    文字行サイズ 33
+    文字ワードラップ false
+    文字出力効果 8
+    文字読後透明度 125 100
+    透明度変数 txtbox my_txtbox_alpha
+
+    // Wait cursor
+    アニメ登録簡易 sys_wait_icon 1 /Plugins/lvui_26/res/Chat/Cursor_%02d.png 1 21 1 21 1 30
+    文字窓待機絵 0 sys_wait_icon 20 3
+
+    .イン txtbox 300
+
+    タッチ素材設定 /Plugins/lvui_26/res/Chat/Chat_Btn_Skip_01.png /Plugins/lvui_26/res/Chat/Chat_Btn_Skip_02.png /Plugins/lvui_26/res/Chat/Chat_Btn_Skip_02.png /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/se_maoudamashii_system47.ogg
+    ボタン txtbox_btn_tSkip 890 676 101 スクリプト /Plugins/lvui_26/_system/textbox.txt txt_skipToggle
+    ハイライト条件 txtbox_btn_tSkip "vn_sysTextReadMethod == 2"
+
+    タッチ素材設定 /Plugins/lvui_26/res/Chat/Chat_Btn_Auto_01.png /Plugins/lvui_26/res/Chat/Chat_Btn_Auto_02.png /Plugins/lvui_26/res/Chat/Chat_Btn_Auto_02.png /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/se_maoudamashii_system47.ogg
+    ボタン txtbox_btn_tAuto 940 676 101 スクリプト /Plugins/lvui_26/_system/textbox.txt txt_autoToggle
+    ハイライト条件 txtbox_btn_tAuto "vn_sysTextReadMethod == 1"
+
+    タッチ素材設定 /Plugins/lvui_26/res/Chat/Chat_Btn_Replay_01.png /Plugins/lvui_26/res/Chat/Chat_Btn_Replay_02.png /Plugins/lvui_26/res/Chat/Chat_Btn_Replay_02.png /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/se_maoudamashii_system47.ogg
+    ボタン txtbox_btn_tReplay 990 676 101 ボイス再生
+
+    タッチ素材設定 /Plugins/lvui_26/res/Chat/Chat_Btn_Qsave_01.png /Plugins/lvui_26/res/Chat/Chat_Btn_Qsave_02.png /Plugins/lvui_26/res/Chat/Chat_Btn_Qsave_02.png /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/se_maoudamashii_system47.ogg
+    ボタン txtbox_btn_tqSave 1040 676 101 クイックセーブ 245 130
+
+    タッチ素材設定 /Plugins/lvui_26/res/Chat/Chat_Btn_Qload_01.png /Plugins/lvui_26/res/Chat/Chat_Btn_Qload_02.png /Plugins/lvui_26/res/Chat/Chat_Btn_Qload_02.png /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/se_maoudamashii_system47.ogg
+    ボタン txtbox_btn_tqLoad 1090 676 101 スクリプト /Plugins/lvui_26/_system/textbox.txt run_quickload
+
+    タッチ素材設定 /Plugins/lvui_26/res/Chat/Chat_Btn_Log_01.png /Plugins/lvui_26/res/Chat/Chat_Btn_Log_02.png /Plugins/lvui_26/res/Chat/Chat_Btn_Log_02.png /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/se_maoudamashii_system47.ogg
+    ボタン txtbox_btn_tBacklog 1140 676 101 スクリプト /Plugins/lvui_26/_system/backlog.txt log_display
+
+    タッチ素材設定 /Plugins/lvui_26/res/Chat/Chat_Btn_Menu_01.png /Plugins/lvui_26/res/Chat/Chat_Btn_Menu_02.png /Plugins/lvui_26/res/Chat/Chat_Btn_Menu_02.png /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/se_maoudamashii_system47.ogg
+    ボタン txtbox_btn_tMenu 1190 676 101 スクリプト /Plugins/lvui_26/_system/menu.txt menu_show
+
+    スクリプト /Plugins/lvui_26/_system/textbox.txt txt_setToggles
+    スクリプト /Plugins/lvui_26/_system/textbox.txt name_none
+}
+スクリプト終了
+
+~//---------------------------------------------------------------
+栞 run_quickload
+{
+    クイックロード
+}
+スクリプト終了
+
+~//---------------------------------------------------------------
+栞 txt_skipToggle
+{
+    もし (vn_sysTextSkipOn == true) {
+        文字進行スキップ false
+    } 違ったら {
+        文字進行スキップ true
+    }
+}
+スクリプト終了
+
+栞 txt_autoToggle
+{
+    もし (vn_sysTextAutoOn == true) {
+        文字進行オート false
+    } 違ったら {
+        文字進行オート true
+    }
+}
+スクリプト終了
+
+~//---------------------------------------------------------------
+栞 txt_reveal
+{
+    もし (textbox_show != false) {
+        スクリプト終了
+    }
+    ジャンプ txt_show
+}
+
+栞 txt_visibleToggle
+{
+    もし (textbox_show != false) ジャンプ txt_hide
+
+    栞 txt_show
+    {
+        透明度 txtbox.* 255 200 全画面領域
+        臨時全域変数 textbox_show = true
+        透明度 jump.* 255 300 全画面領域
+    }
+    スクリプト終了
+
+    栞 txt_hide
+    {
+        透明度 txtbox.* 0 200 全画面領域
+        臨時全域変数 textbox_show = false
+        透明度 jump.* 0 200 全画面領域
+    }
+}
+スクリプト終了
+
+~//---------------------------------------------------------------
+栞 txt_clearToggles
+{
+    キーダウン ctrl.l
+    キーダウン ctrl.r
+    キーダウン space
+}
+スクリプト終了
+
+~//---------------------------------------------------------------
+栞 txt_setToggles
+{
+    キーダウン ctrl.l スクリプト /Plugins/lvui_26/_system/textbox.txt txt_skipToggle
+    キーダウン ctrl.r スクリプト /Plugins/lvui_26/_system/textbox.txt txt_skipToggle
+    キーダウン space スクリプト /Plugins/lvui_26/_system/textbox.txt txt_visibleToggle
+    スクリプト /Plugins/lvui_26/_system/keys.txt 続行指定
+    キーダウン f10 スクリーンショット
+}
+スクリプト終了
+
+~//---------------------------------------------------------------
+栞 txt_setToggles_except_lclick
+{
+    キーダウン ctrl.l スクリプト /Plugins/lvui_26/_system/textbox.txt txt_skipToggle
+    キーダウン ctrl.r スクリプト /Plugins/lvui_26/_system/textbox.txt txt_skipToggle
+    キーダウン space スクリプト /Plugins/lvui_26/_system/textbox.txt txt_visibleToggle
+    キーダウン wheel.down 続行
+    キーダウン enter 続行
+    キーダウン f10 スクリーンショット
+}
+スクリプト終了
+
+~//---------------------------------------------------------------
+~//---------------------------------------------------------------
+クリア
+
+栞 vertical
+{
+    文字窓0 txtbox 60 80 80 1154 400 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 28 カメラ付着
+    使用文字窓 txtbox
+    文字太字 false
+    文字陰 1 2 #000000aa
+    文字ワードラップ false
+    文字方向 縦
+
+    イン txtbox 300
+
+    アニメ登録簡易 sys_wait_icon 1 /Plugins/lvui_26/res/Chat/Cursor_%02d.png 1 21 1 21 1 30
+    文字窓待機絵 0 sys_wait_icon 1 13
+
+    スクリプト /Plugins/lvui_26/_system/textbox.txt txt_setToggles
+}
+スクリプト終了
+
+~//---------------------------------------------------------------
+~//---------------------------------------------------------------
+クリア
+
+栞 name _name
+{
+    文章消去
+
+    もし (cur_name == undefined) 保存変数 cur_name = ""
+    もし (prev_name == undefined) 保存変数 prev_name = ""
+
+    もし (_name == "") ~ジャンプ name_none
+    保存変数 cur_name = _name
+    バックログ現在話者 "--------------------------------------------------------------------------------------------------------------------------------------------------\n\n{{_name}}\n"
+
+    もし (_name == prev_name) ジャンプ name_change
+
+    栞 name_new
+    {
+        ~文字0 txtbox_name_str 240 543 101 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 30 中央 カメラ付着 "{{cur_name}}"
+        ~文字色 txtbox_name_str 254 254 254
+        ~文字陰 txtbox_name_str 1 1 #000000
+        ~移動2 txtbox_name_str, txtbox_name_img 60 0 300 a3
+        イン txtbox_name_str 300
+
+        保存変数 prev_name = cur_name
+    }
+    スクリプト終了
+
+    栞 name_change
+    {
+        ~文字0 txtbox_name_str 300 543 101 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 30 中央 カメラ付着 "{{cur_name}}"
+        ~文字色 txtbox_name_str 254 254 254
+        ~文字陰 txtbox_name_str 1 1 #000000
+
+        保存変数 prev_name = cur_name
+    }
+    スクリプト終了
+
+    栞 name_none
+    {
+        アウト txtbox_name_.*
+        保存変数 vn_backlogName = ""
+        保存変数 cur_name = ""
+        保存変数 prev_name = cur_name
+        バックログ現在話者 "--------------------------------------------------------------------------------------------------------------------------------------------------\n\n"
+    }
+}
+スクリプト終了
+
+~//---------------------------------------------------------------
+~//---------------------------------------------------------------
+クリア
+
+栞 tut_title _title
+{
+    自動カメラ付着 true
+
+    ~文字0 script_str 100 35 81 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 24 中央 "{{_title}}"
+    ~文字色 script_str 254 254 254
+    ~文字陰 script_str 0
+    絵0 script_str_bg /Plugins/lvui_26/res/Chat/Chat_Chapter_Frame.png 0 15 80
+    ~.イン script_str.* 300
+}
+スクリプト終了

@@ -1,0 +1,197 @@
+
+// Extra: OST Player
+
+画面領域開始 sys_extra 原点回帰時解除
+
+栞 extra_in
+画面領域上書き sys_extra_ost
+スクリプト /Plugins/lvui_26/_system/extra-pages.txt extra_change
+
+栞 extra_btns
+自動カメラ付着 true
+
+絵 sysxheader_bg /Plugins/lvui_26/res/Config/Config_Img_BG.png 0 0 302
+絵 sysxheader_title /Plugins/lvui_26/res/Extra/Extra_Img_Title.png 0 0 303
+
+タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Btn_Exit_01.png /Plugins/lvui_26/res/Config/Config_Btn_Exit_02.png /Plugins/lvui_26/res/Config/Config_Btn_Exit_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system46.ogg
+ボタン sysxheader_close 1225 9 305 ジャンプ extra_close
+
+// Tab bar — OST selected
+~タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Btn_Cg_01.png /Plugins/lvui_26/res/Extra/Extra_Btn_Cg_02.png /Plugins/lvui_26/res/Extra/Extra_Btn_Cg_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+~ボタン sysxheader_tab_cg 400 14 305 ジャンプ /Plugins/lvui_26/_system/extra-cg.txt extra_in
+~タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Btn_Replay_01.png /Plugins/lvui_26/res/Extra/Extra_Btn_Replay_02.png /Plugins/lvui_26/res/Extra/Extra_Btn_Replay_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+~ボタン sysxheader_tab_replay 520 14 305 ジャンプ /Plugins/lvui_26/_system/extra-replay.txt extra_in
+~タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Btn_Ost_Selected.png /Plugins/lvui_26/res/Extra/Extra_Btn_Ost_Selected.png /Plugins/lvui_26/res/Extra/Extra_Btn_Ost_Selected.png
+~ボタン sysxheader_tab_ost 640 14 305
+~タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Btn_Ending_01.png /Plugins/lvui_26/res/Extra/Extra_Btn_Ending_02.png /Plugins/lvui_26/res/Extra/Extra_Btn_Ending_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+~ボタン sysxheader_tab_ending 760 14 305 ジャンプ /Plugins/lvui_26/_system/extra-ending.txt extra_in
+
+// State
+もし (play_status == undefined) 臨時全域変数 play_status = -1
+もし (bgm_playing == undefined) 臨時全域変数 bgm_playing = 0
+臨時全域変数 bgm01 = "EOK"
+臨時全域変数 bgm02 = "MOMIZI"
+臨時全域変数 bgm03 = "MORIKAJI6"
+臨時全域変数 bgm04 = "OMOIDE_LOFT"
+臨時全域変数 bgm05 = "SNOWSNOW"
+
+// Track slots
+タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Ost_Slot_01.png /Plugins/lvui_26/res/Extra/Extra_Ost_Slot_02.png /Plugins/lvui_26/res/Extra/Extra_Ost_Slot_02.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/Extra/Extra_Ost_Slot_Selected.png
+ボタン0 sysx_ost_track_0 336 105 304 スクリプト 現在 playbgm (bgm01)
+ボタン0 sysx_ost_track_1 336 177 304 スクリプト 現在 playbgm (bgm02)
+ボタン0 sysx_ost_track_2 336 248 304 スクリプト 現在 playbgm (bgm03)
+ボタン0 sysx_ost_track_3 336 320 304 スクリプト 現在 playbgm (bgm04)
+ボタン0 sysx_ost_track_4 336 391 304 スクリプト 現在 playbgm (bgm05)
+ハイライト条件 sysx_ost_track_0 "bgm_playing == 1"
+ハイライト条件 sysx_ost_track_1 "bgm_playing == 2"
+ハイライト条件 sysx_ost_track_2 "bgm_playing == 3"
+ハイライト条件 sysx_ost_track_3 "bgm_playing == 4"
+ハイライト条件 sysx_ost_track_4 "bgm_playing == 5"
+
+// Track labels
+文字0 sysx_ost_label_0 660 140 305 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 28 中央 "{{bgm01}}"
+文字0 sysx_ost_label_1 660 212 305 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 28 中央 "{{bgm02}}"
+文字0 sysx_ost_label_2 660 284 305 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 28 中央 "{{bgm03}}"
+文字0 sysx_ost_label_3 660 356 305 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 28 中央 "{{bgm04}}"
+文字0 sysx_ost_label_4 660 426 305 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 28 中央 "{{bgm05}}"
+~文字色 sysx_ost_label.* 80 80 80 | 文字陰 sysx_ost_label.* 0 | ~文字太字 sysx_ost_label.* false
+
+// Playback controls
+絵0 sysx_ost_frame /Plugins/lvui_26/res/Extra/Extra_Ost_Img_Frame.png 336 661 304
+
+タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Ost_Btn_Back_01.png /Plugins/lvui_26/res/Extra/Extra_Ost_Btn_Back_02.png /Plugins/lvui_26/res/Extra/Extra_Ost_Btn_Back_02.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg /Plugins/lvui_26/res/se_maoudamashii_system48.ogg
+ボタン0 sysx_ost_back 352 661 305 スクリプト 現在 play_pre
+
+タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Ost_Btn_Play_01.png /Plugins/lvui_26/res/Extra/Extra_Ost_Btn_Play_02.png /Plugins/lvui_26/res/Extra/Extra_Ost_Btn_Play_02.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/Extra/Extra_Ost_Btn_Play_Selected.png
+ボタン0 sysx_ost_play 407 661 305 スクリプト 現在 resume
+ハイライト条件 sysx_ost_play "(play_status == 2) && (bgm_playing != 0)"
+
+タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Ost_Btn_Stop_01.png /Plugins/lvui_26/res/Extra/Extra_Ost_Btn_Stop_02.png /Plugins/lvui_26/res/Extra/Extra_Ost_Btn_Stop_02.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg /Plugins/lvui_26/res/se_maoudamashii_system48.ogg
+ボタン0 sysx_ost_stop 465 661 305 スクリプト 現在 stop
+
+タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Ost_Btn_Pause_01.png /Plugins/lvui_26/res/Extra/Extra_Ost_Btn_Pause_02.png /Plugins/lvui_26/res/Extra/Extra_Ost_Btn_Pause_02.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/Extra/Extra_Ost_Btn_Pause_Selected.png
+ボタン0 sysx_ost_pause 520 661 305 スクリプト 現在 pausebgm
+ハイライト条件 sysx_ost_pause "(play_status == 1) && (bgm_playing != 0)"
+
+タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Ost_Btn_Forward_01.png /Plugins/lvui_26/res/Extra/Extra_Ost_Btn_Forward_02.png /Plugins/lvui_26/res/Extra/Extra_Ost_Btn_Forward_02.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg /Plugins/lvui_26/res/se_maoudamashii_system48.ogg
+ボタン0 sysx_ost_forward 575 661 305 スクリプト 現在 play_next
+
+// Trackbars
+もし (ost_volume == undefined) 全域変数 ost_volume = 100
+タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Common_Scroll_Btn_01.png /Plugins/lvui_26/res/Config/Config_Common_Scroll_Btn_02.png /Plugins/lvui_26/res/Config/Config_Common_Scroll_Btn_02.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg
+トラックバー0 sysx_ost_tr 639 682 306 横 240 ost_volume 0 100
+ゲージ0 sysx_ost_gauge /Plugins/lvui_26/res/Extra/Extra_Ost_Img_Gauge_01.png /Plugins/lvui_26/res/Extra/Extra_Ost_Img_Gauge_02.png 639 676 305 ost_volume 0 100
+
+.イン sysx_.* 300
+
+スクリプト 現在 update_playing_anim
+
+キーダウン r.click ジャンプ extra_close
+
+待機 続行禁止
+
+栞 extra_close
+{
+    // bgm fadeout done inside extra_out
+    // this is to allow bgm persisting while still viewing other extra pages   
+    スクリプト /Plugins/lvui_26/_system/extra-pages.txt extra_out
+    画面領域終了 sys_extra_ost
+}
+スクリプト終了
+
+//---------------------------------------------------------------
+// Playback
+
+栞 playbgm _name
+{
+    臨時全域変数 play_status = 2
+    臨時全域変数 ost_playing_y = 0
+    
+    もし (_name == bgm01) {
+        臨時全域変数 bgm_playing = 1
+        臨時全域変数 ost_playing_y = 111
+    }
+    違ってももし (_name == bgm02) {
+        臨時全域変数 bgm_playing = 2
+        臨時全域変数 ost_playing_y = 183
+    }
+    違ってももし (_name == bgm03) {
+        臨時全域変数 bgm_playing = 3
+        臨時全域変数 ost_playing_y = 254
+    }
+    違ってももし (_name == bgm04) {
+        臨時全域変数 bgm_playing = 4
+        臨時全域変数 ost_playing_y = 326
+    }
+    違ってももし (_name == bgm05) {
+        臨時全域変数 bgm_playing = 5
+        臨時全域変数 ost_playing_y = 397
+    }
+    
+    背景音 {{_name}}.ogg ost_volume 反復
+    スクリプト 現在 update_playing_anim
+}
+スクリプト終了
+
+栞 update_playing_anim
+{
+    もし ((lvExistsObj("sysx_ost_playing")) || (bgm_playing == 0) || (play_status != 2)) {
+        スクリプト終了
+    }
+    
+    アニメ登録簡易 ost_anim 1 /Plugins/lvui_26/res/Extra/Extra_Ost_Slot_Selected_Ef_%02d.png 1 24 1 24 1 40
+    
+    絵0 sysx_ost_playing ost_anim 342 (ost_playing_y) 306 カメラ付着 | イン sysx_ost_playing 300
+    スクリプト終了
+}
+
+栞 resume
+{
+    再生続行 背景音
+    臨時全域変数 play_status = 2
+    スクリプト 現在 update_playing_anim
+}
+スクリプト終了
+
+栞 pausebgm
+{
+    一時停止 背景音
+    アウト sysx_ost_playing 300
+    臨時全域変数 play_status = 1
+}
+スクリプト終了
+
+栞 stop
+{
+    .アウト 背景音 300
+    アウト sysx_ost_playing 300
+    臨時全域変数 play_status = 0
+    臨時全域変数 bgm_playing = 0
+}
+スクリプト終了
+
+栞 play_next
+{
+    臨時全域変数 bgm_playing += 1
+    もし (bgm_playing > 5) 臨時全域変数 bgm_playing = 1
+    スクリプト 現在 playbgmnum (bgm_playing)
+}
+スクリプト終了
+
+栞 play_pre
+{
+    臨時全域変数 bgm_playing -= 1
+    もし (bgm_playing <= 0) 臨時全域変数 bgm_playing = 5
+    スクリプト 現在 playbgmnum (bgm_playing)
+}
+スクリプト終了
+
+栞 playbgmnum _number
+{
+    もし (bgm_playing == 1) スクリプト 現在 playbgm (bgm01)
+    違ってももし (bgm_playing == 2) スクリプト 現在 playbgm (bgm02)
+    違ってももし (bgm_playing == 3) スクリプト 現在 playbgm (bgm03)
+    違ってももし (bgm_playing == 4) スクリプト 現在 playbgm (bgm04)
+    違ってももし (bgm_playing == 5) スクリプト 現在 playbgm (bgm05)
+}
+スクリプト終了

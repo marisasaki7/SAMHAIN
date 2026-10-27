@@ -1,0 +1,50 @@
+
+// Extra: Ending
+
+画面領域開始 sys_extra 原点回帰時解除
+
+栞 extra_in
+画面領域上書き sys_extra_ending
+スクリプト /Plugins/lvui_26/_system/extra-pages.txt extra_change
+
+栞 extra_btns
+自動カメラ付着 true
+
+絵 sysxheader_bg /Plugins/lvui_26/res/Config/Config_Img_BG.png 0 0 302
+絵 sysxheader_title /Plugins/lvui_26/res/Extra/Extra_Img_Title.png 0 0 303
+
+タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Btn_Exit_01.png /Plugins/lvui_26/res/Config/Config_Btn_Exit_02.png /Plugins/lvui_26/res/Config/Config_Btn_Exit_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system46.ogg
+ボタン sysxheader_close 1225 9 305 ジャンプ extra_close
+
+// Tab bar — Ending selected
+~タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Btn_Cg_01.png /Plugins/lvui_26/res/Extra/Extra_Btn_Cg_02.png /Plugins/lvui_26/res/Extra/Extra_Btn_Cg_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+~ボタン sysxheader_tab_cg 400 14 305 ジャンプ /Plugins/lvui_26/_system/extra-cg.txt extra_in
+~タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Btn_Replay_01.png /Plugins/lvui_26/res/Extra/Extra_Btn_Replay_02.png /Plugins/lvui_26/res/Extra/Extra_Btn_Replay_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+~ボタン sysxheader_tab_replay 520 14 305 ジャンプ /Plugins/lvui_26/_system/extra-replay.txt extra_in
+~タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Btn_Ost_01.png /Plugins/lvui_26/res/Extra/Extra_Btn_Ost_02.png /Plugins/lvui_26/res/Extra/Extra_Btn_Ost_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+~ボタン sysxheader_tab_ost 640 14 305 ジャンプ /Plugins/lvui_26/_system/extra-ost.txt extra_in
+~タッチ素材設定 /Plugins/lvui_26/res/Extra/Extra_Btn_Ending_Selected.png /Plugins/lvui_26/res/Extra/Extra_Btn_Ending_Selected.png /Plugins/lvui_26/res/Extra/Extra_Btn_Ending_Selected.png
+~ボタン sysxheader_tab_ending 760 14 305
+
+//---------------------------------------------------------------
+// コンテンツ表示
+
+もし (ending_el_sky != true) ジャンプ finalise
+
+~文字0 sysx_ending_1 640 350 800  rounded-mplus-1c-regular.ttf 44 中央 "君への旅"
+文字色 sysx_ending_1 80 80 80 | 文字陰 sysx_ending_1 0
+
+栞 finalise
+
+.イン sysx_.* 300
+
+キーダウン r.click ジャンプ extra_close
+
+待機 続行禁止
+
+栞 extra_close
+{
+    スクリプト /Plugins/lvui_26/_system/extra-pages.txt extra_out
+    画面領域終了 sys_extra_ending
+}
+スクリプト終了

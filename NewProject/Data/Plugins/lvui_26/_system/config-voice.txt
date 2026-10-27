@@ -1,0 +1,80 @@
+
+// Config: Voice — character voice volume with test button.
+
+画面領域開始 sys_config 原点回帰時解除
+
+栞 config_in
+画面領域上書き sys_config_voice
+スクリプト /Plugins/lvui_26/_system/config-pages.txt config_change
+
+栞 config_btns
+自動カメラ付着 true
+
+絵 syscheader_config /Plugins/lvui_26/res/Config/Config_Img_BG.png 0 0 703
+絵 syscheader_config_title /Plugins/lvui_26/res/Config/Config_Img_Title.png 0 0 704
+
+タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Btn_Exit_01.png /Plugins/lvui_26/res/Config/Config_Btn_Exit_02.png /Plugins/lvui_26/res/Config/Config_Btn_Exit_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system46.ogg
+ボタン syscheader_close 1225 9 705 ジャンプ config_out
+
+// Tab bar
+~タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Btn_System_01.png /Plugins/lvui_26/res/Config/Config_Btn_System_02.png /Plugins/lvui_26/res/Config/Config_Btn_System_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+~もし (!lvSystem::IsFixedWindowSize()) ボタン syscheader_btn0 340 14 705 ジャンプ /Plugins/lvui_26/_system/config-system.txt config_in
+~タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Btn_Text_01.png /Plugins/lvui_26/res/Config/Config_Btn_Text_02.png /Plugins/lvui_26/res/Config/Config_Btn_Text_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+~ボタン syscheader_btn1 460 14 705 ジャンプ /Plugins/lvui_26/_system/config-text.txt config_in
+~タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Btn_Sound_01.png /Plugins/lvui_26/res/Config/Config_Btn_Sound_02.png /Plugins/lvui_26/res/Config/Config_Btn_Sound_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+~ボタン syscheader_btn2 580 14 705 ジャンプ /Plugins/lvui_26/_system/config-sound.txt config_in
+~タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Btn_Voice_Selected.png /Plugins/lvui_26/res/Config/Config_Btn_Voice_Selected.png /Plugins/lvui_26/res/Config/Config_Btn_Voice_Selected.png
+~ボタン syscheader_btn3 700 14 705
+~タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Btn_Info_01.png /Plugins/lvui_26/res/Config/Config_Btn_Info_02.png /Plugins/lvui_26/res/Config/Config_Btn_Info_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+~ボタン syscheader_btn4 820 14 705 ジャンプ /Plugins/lvui_26/_system/config-info.txt config_in
+
+// Character frame
+~絵0 sysc_voice_frame /Plugins/lvui_26/res/Config/Config_Voice_Img_Frame.png 445 105 706
+~絵0 sysc_voice_photo /Plugins/lvui_26/res/Config/Config_Voice_Img_Photo_01.png 450 110 706.1
+
+// Character name
+~文字0 sysc_voice_name 580 130 707 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 24 左 "Character"
+文字陰 sysc_voice_name 0
+文字色 sysc_voice_name 80 80 80
+
+// Volume trackbar
+~もし (gvoice_char == undefined) ~全域変数 gvoice_char = 30
+~もし (gvoice_char_on == undefined) ~全域変数 gvoice_char_on = true
+
+タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Common_Scroll_Btn_01.png /Plugins/lvui_26/res/Config/Config_Common_Scroll_Btn_02.png /Plugins/lvui_26/res/Config/Config_Common_Scroll_Btn_02.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg
+トラックバー0 sysc_tr_voice 580 170 707 横 210 gvoice_char 0 100
+
+ゲージ0 sysc_gauge_master /Plugins/lvui_26/res/Config/Config_Voice_Img_Gauge_01.png /Plugins/lvui_26/res/Config/Config_Voice_Img_Gauge_02.png 582 166 706 gvoice_char 0 100
+
+// Test button
+タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Voice_Btn_Test_01.png /Plugins/lvui_26/res/Config/Config_Voice_Btn_Test_02.png /Plugins/lvui_26/res/Config/Config_Voice_Btn_Test_02.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg /Plugins/lvui_26/res/se_maoudamashii_system48.ogg
+ボタン0 sysc_voice_btn_test 764 188 707 スクリプト 現在 voice_test
+
+// On/Off toggles
+タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Sound_Btn_On_01.png /Plugins/lvui_26/res/Config/Config_Sound_Btn_On_02.png /Plugins/lvui_26/res/Config/Config_Sound_Btn_On_02.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/Config/Config_Sound_Btn_On_Selected.png
+ボタン0 sysc_char_on 577 184 707 全域変数 gvoice_char_on = true
+ハイライト条件 sysc_char_on "(gvoice_char_on == true)"
+
+タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Sound_Btn_Off_01.png /Plugins/lvui_26/res/Config/Config_Sound_Btn_Off_02.png /Plugins/lvui_26/res/Config/Config_Sound_Btn_Off_02.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/Config/Config_Sound_Btn_Off_Selected.png
+ボタン0 sysc_char_off 647 184 707 全域変数 gvoice_char_on = false
+ハイライト条件 sysc_char_off "(gvoice_char_on == false)"
+
+.イン sysc_.* 100
+
+~キーダウン r.click ジャンプ config_out
+
+待機 続行禁止
+
+//--------------------------------------------------------------
+栞 voice_test
+{
+    ボイス sysc_voice_test /Plugins/lvui_26/res/se_maoudamashii_system47.ogg gvoice_char gvoice_char_on バックログ登録禁止
+}
+スクリプト終了
+
+栞 config_out
+{
+    スクリプト /Plugins/lvui_26/_system/config-pages.txt config_out
+    画面領域終了 sys_config_voice
+}
+スクリプト終了

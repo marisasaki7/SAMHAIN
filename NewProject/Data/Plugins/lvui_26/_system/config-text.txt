@@ -1,0 +1,111 @@
+
+// Config: Text
+
+// 原点回帰時解除: ロード時の/Plugins/lvui_26/_system/events.txtの「スクリプト終了原点回帰」実行時に
+// この画面領域も一緒に解除されてほしい。
+画面領域開始 sys_config 原点回帰時解除
+
+スクリプト  /Plugins/lvui_26/_system/config-pages.txt config_change
+絵0 syscheader_config /Plugins/lvui_26/res/Config/Config_Img_BG.png 0 0 703 カメラ付着
+.イン syscheader_config 300
+
+//---------------------------------------------------------------
+// Config の別画面からここにくる際の処理
+
+栞 config_in
+画面領域上書き sys_config_text
+スクリプト /Plugins/lvui_26/_system/config-pages.txt config_change
+
+栞 config_btns
+自動カメラ付着 true
+
+絵 syscheader_config /Plugins/lvui_26/res/Config/Config_Img_BG.png 0 0 703
+絵 syscheader_config_title /Plugins/lvui_26/res/Config/Config_Img_Title.png 0 0 704
+
+タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Btn_Exit_01.png /Plugins/lvui_26/res/Config/Config_Btn_Exit_02.png /Plugins/lvui_26/res/Config/Config_Btn_Exit_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system46.ogg
+ボタン syscheader_close 1225 9 705 ジャンプ config_out
+
+// Tab bar — Text selected
+~タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Btn_System_01.png /Plugins/lvui_26/res/Config/Config_Btn_System_02.png /Plugins/lvui_26/res/Config/Config_Btn_System_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+~もし (!lvSystem::IsFixedWindowSize()) ボタン syscheader_btn0 340 14 705 ジャンプ /Plugins/lvui_26/_system/config-system.txt config_in
+~タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Btn_Text_Selected.png /Plugins/lvui_26/res/Config/Config_Btn_Text_Selected.png /Plugins/lvui_26/res/Config/Config_Btn_Text_Selected.png
+~ボタン syscheader_btn1 460 14 705
+~タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Btn_Sound_01.png /Plugins/lvui_26/res/Config/Config_Btn_Sound_02.png /Plugins/lvui_26/res/Config/Config_Btn_Sound_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+~ボタン syscheader_btn2 580 14 705 ジャンプ /Plugins/lvui_26/_system/config-sound.txt config_in
+~タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Btn_Voice_01.png /Plugins/lvui_26/res/Config/Config_Btn_Voice_02.png /Plugins/lvui_26/res/Config/Config_Btn_Voice_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+~ボタン syscheader_btn3 700 14 705 ジャンプ /Plugins/lvui_26/_system/config-voice.txt config_in
+~タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Btn_Info_01.png /Plugins/lvui_26/res/Config/Config_Btn_Info_02.png /Plugins/lvui_26/res/Config/Config_Btn_Info_02.png /Plugins/lvui_26/res/se_maoudamashii_system13.ogg /Plugins/lvui_26/res/se_maoudamashii_system29.ogg
+~ボタン syscheader_btn4 820 14 705 ジャンプ /Plugins/lvui_26/_system/config-info.txt config_in
+
+// Skip mode title
+絵0 sysc_title1 /Plugins/lvui_26/res/Config/Config_Text_Img_Title_01.png 251 121 704
+
+// Skip mode buttons
+タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Text_Btn_SkipAll_01.png /Plugins/lvui_26/res/Config/Config_Text_Btn_SkipAll_02.png /Plugins/lvui_26/res/Config/Config_Text_Btn_SkipAll_02.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/Config/Config_Text_Btn_SkipAll_Selected.png 
+ボタン0 sysc_skip_all 234 152 704 文字スキップ方式 0
+ハイライト条件 sysc_skip_all "(vn_sysTextSkipMethod == 0)"
+
+タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Text_Btn_SkipRead_01.png /Plugins/lvui_26/res/Config/Config_Text_Btn_SkipRead_02.png /Plugins/lvui_26/res/Config/Config_Text_Btn_SkipRead_02.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg /Plugins/lvui_26/res/se_maoudamashii_system48.ogg /Plugins/lvui_26/res/Config/Config_Text_Btn_SkipRead_Selected.png 
+ボタン0 sysc_skip_read 505 152 704 文字スキップ方式 1
+ハイライト条件 sysc_skip_read "(vn_sysTextSkipMethod == 1)"
+
+// Subtitle labels
+絵0 sysc_sub1 /Plugins/lvui_26/res/Config/Config_Text_Img_Subtitle_01.png 246 246 704
+絵0 sysc_sub2 /Plugins/lvui_26/res/Config/Config_Text_Img_Subtitle_02.png 246 300 704
+絵0 sysc_sub3 /Plugins/lvui_26/res/Config/Config_Text_Img_Subtitle_03.png 246 355 704
+絵0 sysc_sub4 /Plugins/lvui_26/res/Config/Config_Text_Img_Subtitle_04.png 246 409 704
+絵0 sysc_sub5 /Plugins/lvui_26/res/Config/Config_Text_Img_Subtitle_05.png 246 463 704
+
+// Slow/Fast labels
+絵0 sysc_slow1 /Plugins/lvui_26/res/Config/Config_Text_Img_Slow.png 952 245 704.1
+絵0 sysc_fast1 /Plugins/lvui_26/res/Config/Config_Text_Img_Fast.png 487 245 704.1
+絵0 sysc_slow2 /Plugins/lvui_26/res/Config/Config_Text_Img_Slow.png 952 299 704.1
+絵0 sysc_fast2 /Plugins/lvui_26/res/Config/Config_Text_Img_Fast.png 487 299 704.1
+絵0 sysc_slow3 /Plugins/lvui_26/res/Config/Config_Text_Img_Slow.png 952 354 704.1
+絵0 sysc_fast3 /Plugins/lvui_26/res/Config/Config_Text_Img_Fast.png 487 354 704.1
+絵0 sysc_slow4 /Plugins/lvui_26/res/Config/Config_Text_Img_Slow.png 952 408 704.1
+絵0 sysc_fast4 /Plugins/lvui_26/res/Config/Config_Text_Img_Fast.png 487 408 704.1
+
+// Trackbars
+タッチ素材設定 /Plugins/lvui_26/res/Config/Config_Common_Scroll_Btn_01.png /Plugins/lvui_26/res/Config/Config_Common_Scroll_Btn_02.png /Plugins/lvui_26/res/Config/Config_Common_Scroll_Btn_02.png /Plugins/lvui_26/res/se_maoudamashii_system47.ogg
+トラックバー0 sysc_tr_textspeed 486 260 705 横 490 vn_sysTextSpeed 0 100
+トラックバー0 sysc_tr_autospeed 486 314 705 横 490 vn_sysAutoSpeed 0 100
+トラックバー0 sysc_tr_autowait 486 369 705 横 490 vn_sysAutoWait 0 10000
+トラックバー0 sysc_tr_skipspeed 486 423 705 横 490 vn_sysSkipSpeed 0 100
+
+もし (my_txtbox_alpha == undefined) 全域変数 my_txtbox_alpha = 255
+トラックバー0 sysc_tr_txtbox_opacity 486 478 705 横 490 my_txtbox_alpha 0 255
+
+ゲージ0 sysc_gauge_textspeed /Plugins/lvui_26/res/Config/Config_Text_Img_Gauge_01.png /Plugins/lvui_26/res/Config/Config_Text_Img_Gauge_02.png 482 256 706 vn_sysTextSpeed 0 100
+ゲージ0 sysc_gauge_autospeed /Plugins/lvui_26/res/Config/Config_Text_Img_Gauge_01.png /Plugins/lvui_26/res/Config/Config_Text_Img_Gauge_02.png 482 310 706 vn_sysAutoSpeed 0 100
+ゲージ0 sysc_gauge_autowait /Plugins/lvui_26/res/Config/Config_Text_Img_Gauge_01.png /Plugins/lvui_26/res/Config/Config_Text_Img_Gauge_02.png 482 365 706 vn_sysAutoWait 0 10000
+ゲージ0 sysc_gauge_skipspeed /Plugins/lvui_26/res/Config/Config_Text_Img_Gauge_01.png /Plugins/lvui_26/res/Config/Config_Text_Img_Gauge_02.png 482 419 706 vn_sysSkipSpeed 0 100
+ゲージ0 sysc_gauge_txtbox_opacity /Plugins/lvui_26/res/Config/Config_Text_Img_Gauge_01.png /Plugins/lvui_26/res/Config/Config_Text_Img_Gauge_02.png 482 473 706 my_txtbox_alpha 0 255
+
+// Preview box
+絵0 sysc_preview_box /Plugins/lvui_26/res/Config/Config_Text_Img_Box.png 249 542 704
+
+~文字0 sysc_text 320 570 707 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 24 "TEXT SPEED に合わせて出力されます。"
+~文字0 sysc_text_auto 320 620 707 /Plugins/lvui_26/res/NotoSansCJKjp-Regular.otf 24 "AUTO SPEED に合わせて出力されます。"
+文字色 sysc_text.* #ffffff
+文字陰 sysc_text.* 1 1 #000000
+
+~絵0 sysc_txtbox_skin /Plugins/lvui_26/res/Chat/Chat_Frame.png 0 370 706 | 拡大 sysc_txtbox_skin 61% 38%
+透明度変数 sysc_txtbox_skin my_txtbox_alpha
+
+.イン sysc_.* 300
+
+文字速度 sysc_text 設定反映
+文字速度 sysc_text_auto オート設定反映
+文字反復出力 sysc_text.* true
+
+~キーダウン r.click ジャンプ config_out
+
+待機 続行禁止
+
+栞 config_out
+{
+    スクリプト /Plugins/lvui_26/_system/config-pages.txt config_out
+    画面領域終了 sys_config_text
+}
+スクリプト終了
