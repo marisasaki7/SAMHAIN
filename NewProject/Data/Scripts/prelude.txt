@@ -23,7 +23,7 @@ script /Plugins/lvui_26/_system/macros.txt
 "However, the unfamiliar creature behind them, was not.\w
 
 "(Screen Shaking and Stactic Noises)\w
-
+~shake vn_sys_camera 30 10000 
 
 "Everything is shaking, as if a grand earthquake decided to hit.\w
 "Incomprehensible noises, screams, cries, the whole place gets enveloped in a pandemonium.\w

@@ -1,0 +1,48 @@
+
+script /Plugins/lvui_26/_system/events.txt register
+script /Plugins/lvui_26/_system/menu.txt
+script /Plugins/lvui_26/_system/macros.txt
+~cg0 id_cg_SPR_DialogueBox_0 UI/SPR_DialogueBox.png -1 210 0 | zoom id_cg_SPR_DialogueBox_0 100% | .fadein id_cg_SPR_DialogueBox_0 600 a3
+
+~textboxSkin UI/SPR_DialogueBox.png 0 0 100%
+
+~textbox0 id_textbox_1 84 477 1 824 500 NanumGothic.ttf 24 on_camera 
+~useTextbox id_textbox_1
+~fadein id_textbox_1 600 a3
+~textbox_bottom 
+
+
+"Hisui got up from her chair and tip-toe'd her way to the slightly gloomy girl in her class.\w
+"She had her head down, looking at her notebook. Which was full of drawings made in mechanical pencil by herself.\w
+"[Possible CG of her notebook here]\w
+"Her drawing skills were good enough for someone her age, especially since she didn’t have the time to practice as much as her peers. She often had to study a bit more to catch up with her grades.\w
+"[Hisui sprite shows up]\w
+"(Hisui): Good tidings to you, Yuri.\w
+"[Yuri sprite shows up]\w
+"Yuri raises her head from her notebook, she seems to have been immersed in her thoughts until Hisui's voice broke the stream.\w
+"She still struggles to look at others in their eyes.\w
+"(Yuri): G-Good tidings....\w
+"(Hisui): My... I told you should try smiling a bit more! After all, you have a very cute face that doesn't need to be hidden, Yuri.\w
+"Hisui gently traces a finger on Yuri's cheek, making her lose even more her composure.\w
+"(Yuri): I-I... I'm sorry... It's still difficult to me...\w
+"She looks down to her side.\w
+"And Hisui gently held her hands.\w
+"(Hisui): Sshhh... I know, I know. Little by little, I know you will learn how to let yourself shine.\w
+"It seemed as if Hisui liked the //lost lambs.//\w
+"Yuri had always been quiet and insecure, her behavior attracted people who felt a need of being above others.\w
+"Like moths to a flame, they were always circling around Yuri. Irritating with words that felt like //buzz noises// to her.\w
+"It was only natural.\w
+"In a hierarchy, there would always have someone in the bottom. Yuri was the one chosen to keep the natural order of things.\w
+"Or so it was what Yuri thought...\w
+"Under Hisui's wings, she felt like an //equal// for the first time.\w
+"She needed not to fear anymore. While Hisui was there, no harm would befall her.\w
+"Hisui wasn't afraid of touching someone as stained as her, and so no one else feared it either.\w
+"Little by little, the moths morphed into human figures to Yuri. And so, she became Human too.\w
+"(Hisui): Today, at the same place, same hour, alright?\w
+"(Yuri): Alright..... I'll see you there.\w
+"(Hisui): Good girl~. I'm looking forward to it!\w
+"[Hisui sprites disappear]\w
+"[Yuri smiling sprite]\w
+"With a turn, she went back to her seat. And Yuri was able to have her first smile of the day...\w
+"[[Interlude]]\w
+

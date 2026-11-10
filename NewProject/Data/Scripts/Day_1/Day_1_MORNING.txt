@@ -1,4 +1,5 @@
 bookmark aaa
+
 script /Plugins/lvui_26/_system/events.txt register
 script /Plugins/lvui_26/_system/menu.txt
 script /Plugins/lvui_26/_system/macros.txt
@@ -28,40 +29,95 @@ script /Plugins/lvui_26/_system/macros.txt
 "[Switch to bedroom background and Hisui sprite]\w
 "The candle flames are extinguished.\w
 "Packing her things up, she takes a look again in the mirror and smiles. Ready to start her day.\w
+
+
 "[Switch to classroom background]\w
+~bg0 id_bg_background_SalaDeAula_0 bg/background_SalaDeAula.png | .fadein id_bg_background_SalaDeAula_0 600 a3
+
+
+
 "Upon entering the classroom, she's greeted with smiles by everyone.\w
 "(Classmate 1): Good morning, Hisui!\w
+
 "[Hisui sprite appears]\w
+~cg0 id_cg_hisui1_0 sprites/hisui/hisui1.png -42 -194 102 | zoom id_cg_hisui1_0 100% | .fadein id_cg_hisui1_0 600 a3
+
+
 "The girl's name was //Hisui Tsukishiro.//\w
 "Every morning, she was greeted with warm smiles, after all, there was no reason anyone would dislike a girl with such a graceful disposition.\w
 "Hisui was beautiful, dilligent and admired by everyone in her class. However, she was not arrogant about it one bit.\w
 "Her mere presence put people at ease. The day feels like it hasn't started until Hisui walks into class.\w
+
 "[Hisui sprite disappear]\w
+~.fadeout id_cg_hisui1_0 1000
+
 "She greets people with a bow and walks straight to her desk.\w
 "Around her, Hisui pays attention to some unique girls in her class.\w
 "Three girls that stand out a bit more than the others.\w
+
+~cg0 id_cg_SPR_Maria_Neutral_0 sprites/Maria/SPR_Maria_Neutral.png -98 -39 102 | zoom id_cg_SPR_Maria_Neutral_0 100% | .fadein id_cg_SPR_Maria_Neutral_0 600 a3
+
 "[Maria sprite appears]\w
+
+
 "One is very tall, and often stands due to her height.\w
 "She has a serious looking face which makes some people a bit intimidated by her.\w
 "She also has beautiful long curly hair, with two straight hair strands that stand out, giving her a very alluring charm.\w
 "[Maria sprite disappears]\w
+~.fadeout id_cg_SPR_Maria_Neutral_0 1000
+
 "[Alice sprite appears]\w
+
+
+
 "The other is the total opposite.\w
 "A small girl with glossy blonde hair and twintails.\w
 "She looks haughty, and it's because she is.\w
 "However, she looks so cute, one is inclined to forgive her.\w
 "[Alice sprite disappears]\w
+
 "[Yuri sprite appears]\w
+~cg0 id_cg_SPR_Yuri_Neutral_0 sprites/Yuri/SPR_Yuri_Neutral.png -84 -197 102 | zoom id_cg_SPR_Yuri_Neutral_0 100% | .fadein id_cg_SPR_Yuri_Neutral_0 600 a3
+
+
+
 "This one...\w
 "She's always looking down. And doesn't seem to talk much to others.\w
 "She is very pretty, but doesn't seem to have much confidence in herself.\w
 "The glasses add even more to her charm.\w
+
 "[Yuri sprite disappear]\w
+~.fadeout id_cg_SPR_Yuri_Neutral_0 1000
+
 "Albeit eccentric, these are Hisui's //dearest friends.//\w
 "Some girls in class would even be jealous of their connection, wanting to know how they got so close to Hisui.\w
 "Hisui was kind and helpful to everyone, but she had a big soft spot for //her// girls. They would often walk together as a clique, either being seen by each other's side or by Hisui's side.\w
 "And so, she decides to greet one of them first.\w
+
 "[[Tall girl]]\w
 "[[Blonde girl]]\w
 "[[Glasses girl]]\w
 "(Here the player would loop through these options, exhausting them until the player greeted all girls)\w
+
+~touchableRes UI/SPR_ChoicesTextBox.png UI/SPR_ChoicesTextBox.png UI/SPR_ChoicesTextBox.png
+~button id_choice_0 82 97 102 jump Tall_Girl
+~btnText id_choice_0 NanumGothic.ttf 24 0 -50 "Tall girl"
+
+
+~touchableRes UI/SPR_ChoicesTextBox.png UI/SPR_ChoicesTextBox.png UI/SPR_ChoicesTextBox.png
+~button id_choice_1 82 188 104 jump Blonde_girl
+~btnText id_choice_1 NanumGothic.ttf 24 0 -50 "Blonde girl"
+
+
+~touchableRes UI/SPR_ChoicesTextBox.png UI/SPR_ChoicesTextBox.png UI/SPR_ChoicesTextBox.png
+~button id_choice_2 82 286 106 jump Glasses_girl
+~btnText id_choice_2 NanumGothic.ttf 24  0 -50 "Glasses girl"
+
+
+
+bookmark Tall_Girl
+
+bookmark Blonde_girl
+
+bookmark Glasses_girl
+
