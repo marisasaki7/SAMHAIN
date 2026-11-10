@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <BasketNovel>
 	<Settings Width="800" Height="600" NovelTitle="SAMHAIN" InitialScript="title.txt" MsgboxScript="system\sys_msg.txt" ApplicationSize="Window" UseCompressedRes="true" EditorStringFile="Strings_editor.xml" CommandFile="Commands.xml" SyntaxFile="Syntax_core.xshd" disableDebugLog="False" Icon="" sysProjectFolder="MyWorld" sysMemoryManagementType="2" writeDirectoryType="0" displayFPS="true" lang="eng" logDuringSkip="" AppUserResizePolicy="" WindowSizeAdjustable="false" WindowBorderless="false" copy_dialogue_to_clipboard="false" disallowOpen="false" disallowPopups="false" FixedUpdateMethod="0" cap_update_dt_to_fixed_update_dt="false" WindowSizeAllowFreeRatio="" TextAutoWaitMethodDefault="2" Version="17.9.2" displayRAM="true" memory_auto_release_display_error="true" render_fps="120" createOriginDefaultCenter="false" displayScript="false" displayPatchSource="true" resourceTransitionDurationDefault="300" tweenMethodDefault="a12" tweenMethodDefaultColour="a3" tweenMethodDefaultCamera="a3" textDrawMethodDefault="0" UseVSync="" useIR="false" touchableTransitionDurationDefault="300" disableFinishTweensDefault="false" frustumCullingDefault="" />
-	<GameSettings vn_sysTextSkipMethod="1" vn_sysWindowMode="1" vn_sysVoicePlayType="1" vn_win_width="0" vn_win_height="0">
+	<GameSettings vn_sysTextSkipMethod="1" vn_sysWindowMode="1" vn_sysVoicePlayType="1" vn_win_width="800" vn_win_height="600">
 		<vnvar name="vn_sysSfxVolumeOn" range="SYSTEM" created_at="">
 			<value>
 				<value type="BTRUE" identifier="">
@@ -86,17 +86,17 @@
 				</value>
 			</value>
 		</vnvar>
-		<vnvar name="vn_sysTextReadVersion" range="SYSTEM" created_at="">
-			<value>
-				<value type="INTEGER" identifier="">
-					<_value index="1" alt="0" />
-				</value>
-			</value>
-		</vnvar>
 		<vnvar name="vn_sysTextSkipOn" range="SYSTEM" created_at="">
 			<value>
 				<value type="BFALSE" identifier="">
 					<_value index="0" alt="false" />
+				</value>
+			</value>
+		</vnvar>
+		<vnvar name="vn_sysTextReadVersion" range="SYSTEM" created_at="">
+			<value>
+				<value type="INTEGER" identifier="">
+					<_value index="1" alt="0" />
 				</value>
 			</value>
 		</vnvar>

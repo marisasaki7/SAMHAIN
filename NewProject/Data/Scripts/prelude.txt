@@ -1,0 +1,46 @@
+
+script /Plugins/lvui_26/_system/events.txt register
+script /Plugins/lvui_26/_system/menu.txt
+script /Plugins/lvui_26/_system/macros.txt
+~cg0 id_cg_SPR_DialogueBox_0 UI/SPR_DialogueBox.png -1 210 0 | zoom id_cg_SPR_DialogueBox_0 100% | .fadein id_cg_SPR_DialogueBox_0 600 a3
+
+
+~textboxSkin UI/SPR_DialogueBox.png 0 0 100%
+
+~textbox0 id_textbox_1 84 477 1 824 500 NanumGothic.ttf 24 on_camera 
+~useTextbox id_textbox_1
+~fadein id_textbox_1 600 a3
+~textbox_bottom 
+
+
+"Blood.\w
+"A trail of blood comes from the janitor's room.\w
+"Seeping, crawling it's way slowly in the corridor's floor.\w
+"The foul smell is sickening.\w
+"Behind that door, a sight beyond anyone's imagination took place.\w
+"Guts hanging from the body, a sacrifice mercilessly chosen. The three girls were on their knees, praying nonstop.\w
+"But that is all too human. The blood, the guts, the praying.\w
+"However, the unfamiliar creature behind them, was not.\w
+
+"(Screen Shaking and Stactic Noises)\w
+
+
+"Everything is shaking, as if a grand earthquake decided to hit.\w
+"Incomprehensible noises, screams, cries, the whole place gets enveloped in a pandemonium.\w
+"Like the gate to hell had been opened.\w
+"Nothing made sense anymore.\w
+"The gruesome sight.\w
+"The cries.\w
+"The soft prayers.\w
+"The mysterious and incomprehensible //entity.//\w
+"After all, everything was about to end.\w
+~【？？？】
+"Iä...... Great Old Ones.\w
+"Iä...... I implore you.\w
+"Iä...... //Purify this world.//\w
+
+~
+
+~jump  Day_1_MORNING.txt aaa
+
+

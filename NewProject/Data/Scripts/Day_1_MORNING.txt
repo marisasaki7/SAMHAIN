@@ -1,0 +1,67 @@
+bookmark aaa
+script /Plugins/lvui_26/_system/events.txt register
+script /Plugins/lvui_26/_system/menu.txt
+script /Plugins/lvui_26/_system/macros.txt
+~cg0 id_cg_SPR_DialogueBox_0 UI/SPR_DialogueBox.png -1 210 0 | zoom id_cg_SPR_DialogueBox_0 100% | .fadein id_cg_SPR_DialogueBox_0 600 a3
+
+
+~textboxSkin UI/SPR_DialogueBox.png 0 0 100%
+
+~textbox0 id_textbox_1 84 477 1 824 500 NanumGothic.ttf 24 on_camera 
+~useTextbox id_textbox_1
+~fadein id_textbox_1 600 a3
+~textbox_bottom 
+
+"[CG #1]\w
+"A daily prayer.\w
+"Inside her dormitory, she finds herself kneeling, hands together and eyes closed.\w
+"There is a book in front of her. And some candles. A sight that looks like it would belong in a religious boarding school.\w
+"Except...\w
+"That book is not a //Bible. //\w
+"//Malleus Maleficarum// is its name.\w
+"What she's chanting feels incomprehensible, like she's speaking in tongues... Did she make up these prayers herself?\w
+"Regardless of it all, she is a peerless beauty.\w
+"Long black hair forming waves on the floor.\w
+"Perfect porcelain looking skin.\w
+"It feels like she just belongs here. As if this scene came straight out of a painting from an antique shop.\w
+"(Air blowing sound effect)\w
+"[Switch to bedroom background and Hisui sprite]\w
+"The candle flames are extinguished.\w
+"Packing her things up, she takes a look again in the mirror and smiles. Ready to start her day.\w
+"[Switch to classroom background]\w
+"Upon entering the classroom, she's greeted with smiles by everyone.\w
+"(Classmate 1): Good morning, Hisui!\w
+"[Hisui sprite appears]\w
+"The girl's name was //Hisui Tsukishiro.//\w
+"Every morning, she was greeted with warm smiles, after all, there was no reason anyone would dislike a girl with such a graceful disposition.\w
+"Hisui was beautiful, dilligent and admired by everyone in her class. However, she was not arrogant about it one bit.\w
+"Her mere presence put people at ease. The day feels like it hasn't started until Hisui walks into class.\w
+"[Hisui sprite disappear]\w
+"She greets people with a bow and walks straight to her desk.\w
+"Around her, Hisui pays attention to some unique girls in her class.\w
+"Three girls that stand out a bit more than the others.\w
+"[Maria sprite appears]\w
+"One is very tall, and often stands due to her height.\w
+"She has a serious looking face which makes some people a bit intimidated by her.\w
+"She also has beautiful long curly hair, with two straight hair strands that stand out, giving her a very alluring charm.\w
+"[Maria sprite disappears]\w
+"[Alice sprite appears]\w
+"The other is the total opposite.\w
+"A small girl with glossy blonde hair and twintails.\w
+"She looks haughty, and it's because she is.\w
+"However, she looks so cute, one is inclined to forgive her.\w
+"[Alice sprite disappears]\w
+"[Yuri sprite appears]\w
+"This one...\w
+"She's always looking down. And doesn't seem to talk much to others.\w
+"She is very pretty, but doesn't seem to have much confidence in herself.\w
+"The glasses add even more to her charm.\w
+"[Yuri sprite disappear]\w
+"Albeit eccentric, these are Hisui's //dearest friends.//\w
+"Some girls in class would even be jealous of their connection, wanting to know how they got so close to Hisui.\w
+"Hisui was kind and helpful to everyone, but she had a big soft spot for //her// girls. They would often walk together as a clique, either being seen by each other's side or by Hisui's side.\w
+"And so, she decides to greet one of them first.\w
+"[[Tall girl]]\w
+"[[Blonde girl]]\w
+"[[Glasses girl]]\w
+"(Here the player would loop through these options, exhausting them until the player greeted all girls)\w
