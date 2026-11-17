@@ -1,6 +1,6 @@
 
 // Config: Text
-
+bookmark config_in_first
 // 原点回帰時解除: ロード時の/Plugins/lvui_26/_system/events.txtの「スクリプト終了原点回帰」実行時に
 // この画面領域も一緒に解除されてほしい。
 画面領域開始 sys_config 原点回帰時解除
