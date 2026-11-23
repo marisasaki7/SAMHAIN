@@ -1,0 +1,49 @@
+
+script /Plugins/lvui_26/_system/events.txt register
+script /Plugins/lvui_26/_system/menu.txt
+script /Plugins/lvui_26/_system/macros.txt
+
+script utils/character_positions.lua
+script utils/Maria.lua
+script utils/Hisui.lua
+
+~bg0 id_bg_background_SalaDeAula_0 bg/background_SalaDeAula.png | .fadein id_bg_background_SalaDeAula_0 600 a3
+
+~cg0 id_cg_SPR_DialogueBox_0 UI/SPR_DialogueBox.png -1 210 0 | zoom id_cg_SPR_DialogueBox_0 100% | .fadein id_cg_SPR_DialogueBox_0 600 a3
+
+~textboxSkin UI/SPR_DialogueBox.png 0 0 100%
+
+~textbox0 id_textbox_1 84 477 1 824 500 NanumGothic.ttf 24 on_camera 
+~useTextbox id_textbox_1
+~fadein id_textbox_1 600 a3
+~textbox_bottom 
+
+"Getting up from her desk, Hisui gracefully walks over to the tall girl who is absent-mindedly looking at the window.\w"
+
+~lua Display_Hisui_Neutral_Left()
+
+~【Hisui】
+"(Hisui): Good tidings, Maria.\w"
+
+~lua Display_Maria_Neutral_Right()
+
+"She finishes her sentence with a bow.\w"
+"Maria was the name of the girl with long black hair. Her serious expression softened upon hearing Hisui's voice.\w"
+~【Maria】
+"(Maria): Good tidings to you too, Hisui.\w"
+"Maria wasn't someone who smiled much. She was always focused on studying and excelling academically. It felt like she had no time for 'nonsense', her youth wouldn't wait for her.\w"
+"But after becoming friends with Hisui, she changed a bit. People still found her intimidating, but she was seen hanging out with Hisui and the others in seemingly trivial activities.\w"
+"Seems that no one had been able to melt her ice previously, but Hisui showed her that she's a girl her age like any other, and that having fun sometimes was good for her life.\w"
+"Forming connections, having casual chatter, sharing meals together, she wasn't above any of those things.\w"
+""You won't be able to have the best grades if you don't take some time to relax."\w"
+"These simple words directed at Maria had struck her with a realization.\w"
+"It seemed obvious in retrospect, something everyone should know.\w"
+"But no one had told her it was okay to slow down before, that she could have moments of respite for herself.\w"
+"With this, the ever so dilligent Maria had become a little careless......\w"
+~【Hisui】
+"(Hisui): Hope today will be as pleasant as the past days have been. Let's meet today in the same place and hour as always.\w"
+~【Maria】
+"(Maria): Certainly, I will be there.\w"
+~【Hisui】
+"(Hisui): Ehehe~ I know my loyal Maria would never miss a club meeting with me.\w"
+"With a gracious smile, Hisui returns to her place. Classes were about to start and she didn't want to disrupt Maria's attention from it. After all, she knew how important the studies were to Maria.\w"

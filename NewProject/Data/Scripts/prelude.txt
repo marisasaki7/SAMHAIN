@@ -5,6 +5,7 @@ script /Plugins/lvui_26/_system/macros.txt
 ~cg0 id_cg_SPR_DialogueBox_0 UI/SPR_DialogueBox.png -1 210 0 | zoom id_cg_SPR_DialogueBox_0 100% | .fadein id_cg_SPR_DialogueBox_0 600 a3
 
 
+
 ~textboxSkin UI/SPR_DialogueBox.png 0 0 100%
 
 ~textbox0 id_textbox_1 84 477 1 824 500 NanumGothic.ttf 24 on_camera 
@@ -41,6 +42,6 @@ script /Plugins/lvui_26/_system/macros.txt
 
 ~
 
-~jump  Day_1_MORNING.txt aaa
+~jump  Day_1/Day_1_MORNING.txt aaa
 
 

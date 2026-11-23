@@ -8,4 +8,8 @@
 		</value>
 	</vnvar>
 </GlobalVars>
-<ReadTracker />
+<ReadTracker>
+	<Script name="/Scripts/prelude.txt">
+		<start-end start="1" end="44" />
+	</Script>
+</ReadTracker>

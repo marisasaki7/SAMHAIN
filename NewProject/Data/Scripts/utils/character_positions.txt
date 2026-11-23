@@ -1,0 +1,7 @@
+bookmark ShowCG Character Emotion Position
+
+//~cg id_{{Yuri}} sprites/Yuri/SPR_Yuri_{{Emotion}}.png {{Position}} 70 80
+
+~cg id_{{Character}} sprites/{{Character}}/SPR_{{Character}}_{{Emotion}}.png {{Position}} -191 0 
+~cg0 id_cg_SPR_Yuri_Neutral_0 sprites/Yuri/SPR_Yuri_Neutral.png -77 -64 0 | zoom id_cg_SPR_Yuri_Neutral_0 100% | .fadein id_cg_SPR_Yuri_Neutral_0 600 a3
+

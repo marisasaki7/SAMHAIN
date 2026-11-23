@@ -2,6 +2,23 @@
 script /Plugins/lvui_26/_system/events.txt register
 script /Plugins/lvui_26/_system/menu.txt
 script /Plugins/lvui_26/_system/macros.txt
+
+script utils/character_positions.lua
+script utils/Yuri.lua
+
+~var Yurii = "Yuri"
+~var leftPos = -400
+~var rightPos = 100
+~var centerPos = -200
+
+~bg0 id_bg_background_SalaDeAula_0 bg/background_SalaDeAula.png | .fadein id_bg_background_SalaDeAula_0 600 a3
+
+//~lua Display_cg("{{Yurii}}", "Smile", "{{leftPos}}")
+
+//~lua Display_cg("{{Yurii}}", "Neutral", "{{rightPos}}")
+
+~lua Display_Yuri_Happy_Left()
+
 ~cg0 id_cg_SPR_DialogueBox_0 UI/SPR_DialogueBox.png -1 210 0 | zoom id_cg_SPR_DialogueBox_0 100% | .fadein id_cg_SPR_DialogueBox_0 600 a3
 
 ~textboxSkin UI/SPR_DialogueBox.png 0 0 100%
@@ -14,11 +31,20 @@ script /Plugins/lvui_26/_system/macros.txt
 
 "Hisui got up from her chair and tip-toe'd her way to the slightly gloomy girl in her class.\w
 "She had her head down, looking at her notebook. Which was full of drawings made in mechanical pencil by herself.\w
+
 "[Possible CG of her notebook here]\w
+
 "Her drawing skills were good enough for someone her age, especially since she didn’t have the time to practice as much as her peers. She often had to study a bit more to catch up with her grades.\w
+
+
 "[Hisui sprite shows up]\w
+
+
 "(Hisui): Good tidings to you, Yuri.\w
+
 "[Yuri sprite shows up]\w
+
+
 "Yuri raises her head from her notebook, she seems to have been immersed in her thoughts until Hisui's voice broke the stream.\w
 "She still struggles to look at others in their eyes.\w
 "(Yuri): G-Good tidings....\w
@@ -41,8 +67,12 @@ script /Plugins/lvui_26/_system/macros.txt
 "(Hisui): Today, at the same place, same hour, alright?\w
 "(Yuri): Alright..... I'll see you there.\w
 "(Hisui): Good girl~. I'm looking forward to it!\w
+
 "[Hisui sprites disappear]\w
+
+
 "[Yuri smiling sprite]\w
+
 "With a turn, she went back to her seat. And Yuri was able to have her first smile of the day...\w
 "[[Interlude]]\w
 

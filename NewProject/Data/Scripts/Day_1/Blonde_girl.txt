@@ -1,0 +1,61 @@
+
+script /Plugins/lvui_26/_system/events.txt register
+script /Plugins/lvui_26/_system/menu.txt
+script /Plugins/lvui_26/_system/macros.txt
+
+script utils/character_positions.lua
+script utils/Alice.lua
+script utils/Hisui.lua
+
+~bg0 id_bg_background_SalaDeAula_0 bg/background_SalaDeAula.png | .fadein id_bg_background_SalaDeAula_0 600 a3
+
+~cg0 id_cg_SPR_DialogueBox_0 UI/SPR_DialogueBox.png -1 210 0 | zoom id_cg_SPR_DialogueBox_0 100% | .fadein id_cg_SPR_DialogueBox_0 600 a3
+
+~textboxSkin UI/SPR_DialogueBox.png 0 0 100%
+
+~textbox0 id_textbox_1 84 477 1 824 500 NanumGothic.ttf 24 on_camera 
+~useTextbox id_textbox_1
+~fadein id_textbox_1 600 a3
+~textbox_bottom 
+
+
+"Hisui walks up to the small blonde girl that was chirply chatting with some other classmates in the corner of the room.\w"
+"Sensing Hisui's presence, the two classmates open up space for their morning greetings.\w"
+"Hisui sprite appears\w"
+~lua Display_Hisui_Neutral_Left()
+~【Hisui】
+"(Hisui): Good tidings, Alice.\w"
+"Alice sprites appears\w"
+~lua Display_Alice_Neutral_Right()
+~【Alice】
+"(Alice): Good tidings, Hisui!\w"
+"She finishes with a gracious bow.\w"
+"Alice more than anyone else, felt like she naturally belongs in this fancy boarding school.\w"
+"Her small stature didn't interfere one bit in her elegance.\w"
+"OPTIONAL PHRASE IF PLAYER GREETED YURI BEFORE ALICE\w"
+"Being the total opposite of Yuri, she always has her head up and a smile on her face.\w"
+"Unlike Yuri, she has a lot of other friends in this school besides Hisui. Her naturally shiny personality allows for that.\w"
+"PHRASE IN CASE PLAYER DIDN'T GREET YURI BEFORE ALICE\w"
+"She always held her chin up and her smile broad.\w"
+"CONTINUES HERE\w"
+"However, it isn't the type of gentle inviting smile that Hisui had.\w"
+"It is a haughty smile, bearing pride of her family name.\w"
+"She isn't very easy to deal with. Other lady-like girls get along with her, but anyone who didn't fit this mold gets scorned at by Alice.\w"
+"Some other girls in class weren't very fond of Alice either, so it's hard to say that she is popular with everyone. However, no one really tries to stop her because of her influential family.\w"
+"But it seems something changed within Alice on the past few months, after she got closer to Hisui.\w"
+"'It's as if Hisui has healing properties!' some students would say.\w"
+"Alice while still being a haughty person, she stopped saying mean remarks to other girls.\w"
+"It seems she really admired Hisui too. Who is the perfect lady, so she took some efforts to be a little more like Hisui.\w"
+"Both teachers and classmates alike are grateful for that. Alice became a much more pleasant presence in class and other activities.\w"
+~【Hisui】
+"(Hisui): Good to see you're in good spirits today again.\w"
+~【Hisui】
+"(Hisui): Let's meet again later, at the same time and same place as always.\w"
+~【Alice】
+"(Alice): Of course! I'll never miss a meeting with you! Unless I get sick or something.\w"
+~【Hisui】
+"(Hisui): Haha. I can't imagine the always energetic Alice getting sick like this.\w"
+"Alice for some reason, got a bit embarrassed at this comment. Hisui was the only one who could make Alice lose composure sometimes.\w"
+~【Hisui】
+"(Hisui): I'll be going then! See you later.\w"
+"Hisui gave Alice a small pat in her head. Had it been anyone else, Alice would definitely have hated this.\w"
