@@ -41,7 +41,7 @@ button0 buttonsLoad 254 383 5 | zoom buttonsLoad 140% |
 
 
 touchableRes UI/SPR_ConfigButton.png UI/SPR_ConfigButtonS.png UI/SPR_ConfigButtonSE.png
-button0 buttonsConfig 450 385 5 | zoom buttonsConfig 130% | 
+button0 buttonsConfig 450 385 5 | zoom buttonsConfig 130% | script /Plugins/lvui_26/_system/config-system.txt config_in_first
 
 
 
